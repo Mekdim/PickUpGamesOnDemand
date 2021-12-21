@@ -1,0 +1,22 @@
+.signUp{
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:100vh;
+    width:100vw;
+    background-color: #f7f7f7;
+    margin-top: 10px;
+}
+.signUp__paper{
+    width: 35vw;
+    padding: "20px";
+    margin: "10px auto"
+
+}
+@media (max-width: 800px) { 
+    .signUp__paper{
+        width: 80vw;
+
+   }
+}

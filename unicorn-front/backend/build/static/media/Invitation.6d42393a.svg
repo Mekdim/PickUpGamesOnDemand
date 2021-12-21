@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>Invitation</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#E8E7E7" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="82.74999%" x2="50%" y2="18.9976932%" id="linearGradient-2">
+            <stop stop-color="#C4F7FB" offset="0%"></stop>
+            <stop stop-color="#0064BC" stop-opacity="0.651414991" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Invite" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Invitation">
+            <g>
+                <g id="Invite-Copy">
+                    <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="40" height="40"></rect>
+                    <polygon id="Path" fill="url(#linearGradient-2)" points="0 17 20 0 40 17 40 40 0 40"></polygon>
+                </g>
+                <rect id="Rectangle-Copy-3" fill="#FFFFFF" x="7" y="12" width="26" height="23"></rect>
+                <polyline id="Path-2-Copy" points="0 18 19.1324048 28.7619777 40 40.5 40 18"></polyline>
+                <path d="M40,18 L21.5,30" id="Path-3-Copy"></path>
+                <polygon id="Path-4-Copy" fill="#2DB7EE" points="40 18 20 30.2666667 40 41"></polygon>
+                <polygon id="Path-5-Copy" fill="#1F9EE3" points="0 18 0 41 40 41"></polygon>
+                <rect id="Rectangle-Copy-2" stroke="#148A47" fill="#D8D8D8" x="19.5" y="16.5" width="1" height="9"></rect>
+                <rect id="Rectangle-Copy" stroke="#148A47" fill="#D8D8D8" transform="translate(20.000000, 21.000000) rotate(90.000000) translate(-20.000000, -21.000000) " x="19.5" y="16.5" width="1" height="9"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
