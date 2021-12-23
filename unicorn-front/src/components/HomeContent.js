@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/HomeContent.css";
-import SearchDateComponent from "./SearchDateComponent";
-import { useStateValue } from "../StateProvider";
-import TextField from "@mui/material/TextField";
 import PitchCard from "./PitchCard";
 import PhotoCard from "./PhotoCard";
-import { Container, Grid, IconButton } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 import styled from "@emotion/styled";
-import { useHistory, Link as NavLink } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import useTheme from "@mui/material/styles/useTheme";
 import SearchBar from "./search/SearchBar";
+import landingImage from "../images/Landing.avif";
+
 const ContainerStyled = styled(Container)`
   padding-top: 24px;
   padding-bottom: 24px;
@@ -21,9 +20,18 @@ const GridStyled = styled(Grid)`
   justify-content: center;
 `;
 
-const GridStyledItem = styled(Grid)`
+const LandingPage = styled.div`
+  background-image: url(${landingImage});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  /*margin-top: 2px;*/
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
 `;
 
 function HomeContent() {
@@ -32,7 +40,7 @@ function HomeContent() {
   return (
     <div className="homeSection">
       {!medium && <SearchBar />}
-      <div className="homeSection__landingImage">
+      <LandingPage>
         <h1
           style={{
             color: "white",
@@ -43,10 +51,9 @@ function HomeContent() {
           Stay Active and Healthy
         </h1>
         <p style={{ color: "white", "margin-top": "8px", "font-size": "30px" }}>
-          {" "}
           Are you ready to play the beautiful game?
         </p>
-      </div>
+      </LandingPage>
       <h1>Featured Gaming Grounds</h1>
       <ContainerStyled maxWidth={"xl"}>
         <GridStyled container spacing={3}>

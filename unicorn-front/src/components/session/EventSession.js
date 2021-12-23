@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import floodLight from "../../img/floodlight.jpg";
+import floodLight from "../../images/floodlight.jpg";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import EventDetails from "./EventDetails";

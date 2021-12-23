@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import styled from "@emotion/styled";
 import "../css/Pulse.css";
-import LazyLoad from 'react-lazy-load';
+
 const CardContentStyled = styled(CardContent)`
   display: flex;
   flex-direction: column;
@@ -20,7 +20,6 @@ const CardStyled = styled(Card)`
 
 const PhotoCard = ({ src, name, description }) => {
   return (
-   
     <CardStyled>
       <CardActionArea>
         <CardMedia
@@ -43,7 +42,6 @@ const PhotoCard = ({ src, name, description }) => {
         </CardContentStyled>
       </CardActionArea>
     </CardStyled>
-   
   );
 };
 

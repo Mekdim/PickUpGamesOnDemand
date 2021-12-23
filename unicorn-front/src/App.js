@@ -1,40 +1,26 @@
 import "./css/App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
 import Cookies from "js-cookie";
 import { fetchNotification } from "./components/logic/logic";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./reducer";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-const Home = React.lazy(() => import("./pages/Home"));
-//import Home from "./pages/Home";
-const SignIn = React.lazy(() => import("./pages/SignInPage"));
-//import SignIn from "./pages/SignInPage";
-const SignUp = React.lazy(() => import("./pages/SignUpPage"));
-//import SignUp from "./pages/SignUpPage";
-const Pitch = React.lazy(() => import("./pages/Pitch"));
-//import Pitch from "./pages/Pitch";
-const SearchResults = React.lazy(() => import("./pages/SearchResultsPage"));
-//import SearchResults from "./pages/SearchResultsPage";
-const Terms = React.lazy(() => import("./pages/TermsPage"));
-//import Terms from "./pages/TermsPage";
-const Privacy = React.lazy(() => import("./pages/PrivacyPage"));
-//import Privacy from "./pages/PrivacyPage";
-const AboutUs = React.lazy(() => import("./pages/AboutUsPage"));
-//import AboutUs from "./pages/AboutUsPage";
-const ContactUs = React.lazy(() => import("./pages/ContactUsPage"));
-//import ContactUs from "./pages/ContactUsPage";
 
-const ProfilePage = React.lazy(() => import("./pages/ProfilePage"));
-//import ProfilePage from "./pages/ProfilePage";
-const EventPage = React.lazy(() => import("./pages/EventPage"));
-//import EventPage from "./pages/EventPage";
-const TestPage = React.lazy(() => import("./pages/TestPage"));
-//import TestPage from "./pages/TestPage";
-
+const Home = lazy(() => import("./pages/Home"));
+const SignIn = lazy(() => import("./pages/SignInPage"));
+const SignUp = lazy(() => import("./pages/SignUpPage"));
+const Pitch = lazy(() => import("./pages/Pitch"));
+const SearchResults = lazy(() => import("./pages/SearchResultsPage"));
+const Terms = lazy(() => import("./pages/TermsPage"));
+const Privacy = lazy(() => import("./pages/PrivacyPage"));
+const AboutUs = lazy(() => import("./pages/AboutUsPage"));
+const ContactUs = lazy(() => import("./pages/ContactUsPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const EventPage = lazy(() => import("./pages/EventPage"));
 
 function App() {
-  const [state, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   useEffect(async () => {
     try {
@@ -50,48 +36,66 @@ function App() {
       console.error("Unable to fetch notifications ", error);
     }
   }, []);
+
   return (
     <Router>
       <ScrollToTop />
       <Switch>
-      <React.Suspense fallback={<p>Loading page...</p>}>
         <Route exact path="/">
-          <Home />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <Home />
+          </Suspense>
         </Route>
         <Route path="/signin">
-          <SignIn />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <SignIn />
+          </Suspense>
         </Route>
         <Route path="/signup">
-          <SignUp />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <SignUp />
+          </Suspense>
         </Route>
         <Route path="/profile">
-          <ProfilePage />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <ProfilePage />
+          </Suspense>
         </Route>
         <Route path="/pitch/:id/:date">
-          <Pitch className={"App"} />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <Pitch className={"App"} />
+          </Suspense>
         </Route>
         <Route path="/sessions/:id/">
-          <EventPage className={"App"} />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <EventPage className={"App"} />
+          </Suspense>
         </Route>
         <Route path="/search_results">
-          <SearchResults />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <SearchResults />
+          </Suspense>
         </Route>
         <Route path="/terms">
-          <Terms />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <Terms />
+          </Suspense>
         </Route>
         <Route path="/privacy">
-          <Privacy />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <Privacy />
+          </Suspense>
         </Route>
         <Route path="/aboutus">
-          <AboutUs />
-        </Route>
-        <Route path="/test">
-          <TestPage />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <AboutUs />
+          </Suspense>
         </Route>
         <Route path="/contactus">
-          <ContactUs className={"App"} />
+          <Suspense fallback={() => <div> Loading...</div>}>
+            <ContactUs className={"App"} />
+          </Suspense>
         </Route>
-        </React.Suspense>
       </Switch>
     </Router>
   );

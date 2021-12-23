@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Button } from "@mui/material";
 import styled from "@emotion/styled";
 import SportsIcon from "@mui/icons-material/Sports";
-import JoinModal from "../modal/JoinModal";
 import { useHistory } from "react-router-dom";
 import { PitchContext } from "../pitch/PitchContext";
 

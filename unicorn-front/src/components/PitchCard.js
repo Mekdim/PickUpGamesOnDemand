@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 import styled from "@emotion/styled";
 import { useHistory } from "react-router-dom";
 import "../css/Pulse.css";
-import LazyLoad from 'react-lazy-load';
 
 const CardActionsStyled = styled(CardActions)`
   justify-content: flex-end;
@@ -48,7 +47,6 @@ const CardStyled = styled(Card)`
 const PitchCard = ({ src, name, description, path }) => {
   const history = useHistory();
   return (
-   
     <CardStyled>
       <CardActionArea onClick={() => history.push(path)}>
         <CardMedia
@@ -87,7 +85,6 @@ const PitchCard = ({ src, name, description, path }) => {
         </StyledJoinButton>
       </CardActionsStyled>
     </CardStyled>
-    
   );
 };
 

@@ -15,7 +15,7 @@ import { Avatar, Divider, ListItemIcon } from "@mui/material";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { auth } from "../Firebase";
-import { ReactComponent as LogoSvg } from "../img/Logo--64x97.svg";
+import LogoSvg from "../images/LogoMain.svg";
 import SearchBar from "./search/SearchBar";
 import Tooltip from "@mui/material/Tooltip";
 import { AccountCircle } from "@mui/icons-material";
@@ -91,19 +91,23 @@ export default function HeaderBar({ showSearchBar = false }) {
   };
   const signOutAndHandleClose = async (event) => {
     setAnchorEl(null);
-    try{
-      let result  = await logOutUser()
-    } catch(error){
-      alert("Sorry, there was an error while logging out. Your session tokens might not reset properly")
+    try {
+      let result = await logOutUser();
+    } catch (error) {
+      alert(
+        "Sorry, there was an error while logging out. Your session tokens might not reset properly"
+      );
       // if error comes from backend API - we can grab the mesage here or send it to logger in the future
       if (typeof error.json === "function") {
-        error.json().then(error => {
-          //console.log("An API error from backend API while loging out  for userid XXX");
-        }).catch(genericError => {
-          //console.log("Another error ");
-        });
-      }
-      else{
+        error
+          .json()
+          .then((error) => {
+            //console.log("An API error from backend API while loging out  for userid XXX");
+          })
+          .catch((genericError) => {
+            //console.log("Another error ");
+          });
+      } else {
         // error status undefined here
         //console.log("some sort of fetch error happended")
       }
