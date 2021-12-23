@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "heroku-postbuild": "cd unicorn-front && npm install && npm run build && npm run prod"
+    "heroku-postbuild": "cd unicorn-front && npm install && npm run build"
   },
   "author": "Mekdim",
   "license": "ISC",

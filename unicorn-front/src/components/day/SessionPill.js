@@ -135,13 +135,7 @@ const SessionPill = ({ name, number, height, sessionId }) => {
             >
               Join!
             </StyledButton>
-            <JoinModal
-              handleClose={handleClose}
-              open={open}
-              sessionId={sessionId}
-              datum={data}
-              loadingState={isModalLoading}
-            />
+            
           </StyledCentered>
         </StyledVertical>
       </StyledJoin>
