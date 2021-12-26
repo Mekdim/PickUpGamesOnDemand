@@ -193,7 +193,7 @@ function SignUp() {
         <Formik initialValues={{ email: "", password: '', firstname: "", lastname: '' }} onSubmit={submit}>
           {(props) => (
             <Form>
-              {!phoneVerified ? (
+              {phoneVerified ? (
                 <>
                   <Field  as={TextField} label="Phone Number" name="Phone Number" placeholder="Example +251918224567" type="phonenumber" fullWidth required variant="standard" style={{ backgroundColor: "#f7f7f7", marginTop: "10px", marginBottom: "10px" }} onChange={(event) => { setPhoneNumber(event.target.value) }} />
                   <p> Your phone number is required for verification purposes. We will be sending you verification code </p>
