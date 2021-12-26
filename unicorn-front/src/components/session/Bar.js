@@ -82,7 +82,7 @@ const Bar = ({ sessionId }) => {
   const [failed, setFailed] = useState(false);
   const [isJoining, setIsJoining] = useState(false);
   const [joined, setJoined] = useState(false);
-  const [backEndUrl, setBackEndUrl] = useState(process.env.backEndUrl || "http://localhost:8080");
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
   const disableStatus = useMemo(() => {
     return disableButton({
       joined,

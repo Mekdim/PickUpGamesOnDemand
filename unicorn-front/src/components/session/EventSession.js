@@ -110,7 +110,7 @@ const StyledChat = styled.div`
 `;
 
 const fetchSessionData = ({ sessionId }) => {
-  let backEndUrl = process.env.backEndUrl || "http://localhost:8080"
+  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080"
   return fetch(`${backEndUrl}/pitch/sessions/${sessionId}`, {
     method: "GET",
   })

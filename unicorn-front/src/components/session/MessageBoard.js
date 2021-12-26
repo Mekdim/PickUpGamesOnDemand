@@ -33,7 +33,7 @@ function MessageBoard({ sessionId }) {
   const [profileDetails, setProfileDetails] = useState({});
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [backEndUrl, setBackEndUrl] = useState(process.env.backEndUrl || "http://localhost:8080");
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
   const refOfLastMessage = useRef();
   const fetchUserInfo = ()=>{
     let bearer_token = Cookies.get('accessToken')

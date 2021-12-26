@@ -278,7 +278,7 @@ const PitchSession = ({ pitchId, date }) => {
   const [open, setOpen] = useState(false);
   const [events, setEvents] = useState([]);
   const [currentDate, setCurrentDate] = useState(date);
-  const [backEndUrl, setBackEndUrl] = useState(process.env.backEndUrl || "http://localhost:8080");
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
   const history = useHistory();
   const [nextDate, setNextDate] = useState(
     addDay({ date: date, numberOfDays: 1 })

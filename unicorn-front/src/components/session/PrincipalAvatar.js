@@ -18,7 +18,7 @@ const StyledAvatar = styled(Avatar)`
 `;
 
 const fetchSessionPlayers = ({ sessionId }) => {
-  let backEndUrl = process.env.backEndUrl || "http://localhost:8080"
+  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080"
   return fetch(`${backEndUrl}/pitch/${sessionId}/players`, {
     method: "GET",
   })

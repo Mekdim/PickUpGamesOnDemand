@@ -9,7 +9,7 @@ const fetcher = (url) =>
   }).then((r) => r.json());
 
 const usePitches = () => {
-  let backEndUrl = process.env.backEndUrl || "http://localhost:8080";
+  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080";
   const { data, error } = useSWR(
     `${backEndUrl}/pitch/pitches`,
     fetcher

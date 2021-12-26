@@ -66,7 +66,7 @@ const StyledFiledValue = styled.h5`
 `;
 
 const fetchUsers = () => {
-  let backEndUrl = process.env.backEndUrl || "http://localhost:8080"
+  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080"
   return fetch(`${backEndUrl}/users/all`, {
     method: "GET",
   })
