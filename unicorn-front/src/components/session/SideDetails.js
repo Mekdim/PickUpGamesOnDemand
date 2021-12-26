@@ -66,7 +66,8 @@ const StyledFiledValue = styled.h5`
 `;
 
 const fetchUsers = () => {
-  return fetch(`http://localhost:8080/users/all`, {
+  let backEndUrl = process.env.backEndUrl || "http://localhost:8080"
+  return fetch(`${backEndUrl}/users/all`, {
     method: "GET",
   })
     .then((res) => {
@@ -86,7 +87,7 @@ const fetchUsers = () => {
 const SideDetails = ({ date, location, sessionId }) => {
   const [open, setOpen] = useState(false);
   const [users, setUsers] = useState([]);
-
+  const [backEndUrl, setBackEndUrl] = useState("http://localhost:8080");
   useEffect(async () => {
     try {
       let allUsers = await fetchUsers();

@@ -20,7 +20,7 @@ function SignUp() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
 
   const recaptchaVerifierSimple = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
@@ -115,7 +115,7 @@ function SignUp() {
           return
         }
         setLoading(true)
-        fetch('http://localhost:8080/users/addProfile', {
+        fetch(`${backEndUrl}/users/addProfile`, {
           method: "POST",
           headers: {
             'Content-type': 'application/json'

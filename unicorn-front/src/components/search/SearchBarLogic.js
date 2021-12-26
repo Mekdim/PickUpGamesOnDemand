@@ -22,8 +22,8 @@ export const getPitches = ({
     alert("please select date to search");
     return;
   }
-
-  let url = "http://localhost:8080/pitch/pitches/";
+  let backEndUrl = process.env.backEndUrl || "http://localhost:8080";
+  let url = `${backEndUrl}/pitch/pitches/`;
   const formatedDate = date.format("YYYY-MM-DD");
   if (locationSelected) {
     url = `${url}${locationSelected.id}/`;

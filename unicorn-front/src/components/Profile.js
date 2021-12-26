@@ -24,6 +24,7 @@ function ProfilePage() {
   const [firstname, setFirstName] = useState(null);
   const [lastname, setLastName] = useState(null);
   const [address, setAddress] = useState(null);
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
 
   const handleProfilePictureChange = (event) => {
     // Mark: Validate file is image?  set the image 
@@ -49,7 +50,7 @@ function ProfilePage() {
       () => {
         storage.ref("images").child(image.name).getDownloadURL().then(url => {
           // update the backend db with the profile image url
-          fetch('http://localhost:8080/users/addProfilePicture', {
+          fetch(`${backEndUrl}/users/addProfilePicture`, {
             method: "POST",
             headers: {
               'Content-type': 'application/json'
@@ -110,7 +111,7 @@ function ProfilePage() {
        if (!bearer_token){
           alert(" we couldnt get your stored sessionin  data . Please try logging in again")
        } 
-    return fetch('http://localhost:8080/users/updateProfile', {
+    return fetch(`${backEndUrl}/users/updateProfile`, {
       method: "PUT",
       headers: {
         'Content-type': 'application/json',
@@ -184,7 +185,7 @@ function ProfilePage() {
        if (!bearer_token){
           alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
        } 
-      return fetch('http://localhost:8080/users/getProfile/' + userId, {
+      return fetch(`${backEndUrl}/users/getProfile/` + userId, {
         method: "GET",
         headers: {
           'Content-type': 'application/json',
@@ -212,7 +213,7 @@ function ProfilePage() {
        if (!bearer_token){
           alert(" we could get your stored sessionin  data . Please try logging in again ")
       } 
-      return fetch('http://localhost:8080/users/getProfilePicture/' + id, {
+      return fetch(`${backEndUrl}/users/getProfilePicture/` + id, {
         method: "GET",
         headers: {
           'Content-type': 'application/json',

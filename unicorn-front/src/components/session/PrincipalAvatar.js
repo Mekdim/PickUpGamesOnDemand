@@ -18,7 +18,8 @@ const StyledAvatar = styled(Avatar)`
 `;
 
 const fetchSessionPlayers = ({ sessionId }) => {
-  return fetch(`http://localhost:8080/pitch/${sessionId}/players`, {
+  let backEndUrl = process.env.backEndUrl || "http://localhost:8080"
+  return fetch(`${backEndUrl}/pitch/${sessionId}/players`, {
     method: "GET",
   })
     .then((res) => {
@@ -57,7 +58,7 @@ const PrincipalAvatar = ({ sessionId }) => {
   const [players, setPlayers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(false);
-
+  const [backEndUrl, setBackEndUrl] = useState("http://localhost:8080");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

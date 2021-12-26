@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import InvitationSvg from "../../images/Invitation.svg";
+import { ReactComponent as InvitationSvg } from "../../img/Invitation.svg";
 import Link from "@mui/material/Link";
 import { clearNotification } from "../logic/logic";
 import { useStateValue } from "../../StateProvider";

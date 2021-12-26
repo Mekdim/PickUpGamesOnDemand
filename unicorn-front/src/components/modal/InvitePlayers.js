@@ -84,8 +84,8 @@ const handleInvite = ({ selected, handleClose, sessionId }, refreshEnabled=true)
        if (!bearer_token){
           alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
        } 
-    
-  return fetch(`http://localhost:8080/users/invite/${sessionId}`, {
+  let backEndUrl = process.env.backEndUrl || "http://localhost:8080"
+  return fetch(`${backEndUrl}/users/invite/${sessionId}`, {
     method: "POST",
     body: JSON.stringify(selected),
     headers: {
@@ -125,6 +125,7 @@ const handleInvite = ({ selected, handleClose, sessionId }, refreshEnabled=true)
 const ParticipantsModal = ({ open, handleClose, players, sessionId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState([]);
+  const [backEndUrl, setBackEndUrl] = React.useState("http://localhost:8080");
   return (
     <StyledDialog onClose={handleClose} open={open}>
       <StyledDialogTitle>

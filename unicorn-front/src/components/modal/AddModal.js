@@ -110,8 +110,9 @@ const AddModal = ({ open, handleClose, pitchId }) => {
   const [endTimeDisabled, setEndTimeDisabled] = useState(true);
   const [sessionName, setSessionName] = useState("");
   const [isError, setIsError] = useState(false);
+  const [backEndUrl, setBackEndUrl] = React.useState("http://localhost:8080");
   const playerId = Cookies.get("id");
-
+  
   const cleanUpState = () => {
     setIsLoading(false);
     setDate(new Date());
@@ -139,7 +140,7 @@ const AddModal = ({ open, handleClose, pitchId }) => {
        if (!bearer_token){
           alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
        }
-    fetch("http://localhost:8080/pitch/addSession", {
+    fetch(`${backEndUrl}/pitch/addSession`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
