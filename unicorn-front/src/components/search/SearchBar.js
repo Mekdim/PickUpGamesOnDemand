@@ -87,7 +87,8 @@ const SearchBar = () => {
 
   useEffect(() => {
     let isMounted = true;
-    fetch("http://localhost:8080/pitch/pitches/", {
+    let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080";
+    fetch(`${backEndUrl}/pitch/pitches/`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
