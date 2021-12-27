@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Button } from "@mui/material";
 import styled from "@emotion/styled";
 import SportsIcon from "@mui/icons-material/Sports";
-import JoinModal from "../modal/JoinModal";
 import { useHistory } from "react-router-dom";
 import { PitchContext } from "../pitch/PitchContext";
 
@@ -84,7 +83,7 @@ const SessionPill = ({ name, number, height, sessionId }) => {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({});
   const [isModalLoading, setIsModalLoading] = React.useState(true);
-  const [backEndUrl, setBackEndUrl] = React.useState(process.env.REACT_APP_backEndUrl ||  "http://localhost:8080");
+
   const { pitch } = useContext(PitchContext);
   const history = useHistory();
 
@@ -96,7 +95,7 @@ const SessionPill = ({ name, number, height, sessionId }) => {
   };
 
   const handleOpen = () => {
-    fetch(`${backEndUrl}/pitch/sessions/${sessionId}`, {
+    fetch(`http://localhost:8080/pitch/sessions/${sessionId}`, {
       method: "GET",
     })
       .then((res) => {
@@ -136,13 +135,6 @@ const SessionPill = ({ name, number, height, sessionId }) => {
             >
               Join!
             </StyledButton>
-            <JoinModal
-              handleClose={handleClose}
-              open={open}
-              sessionId={sessionId}
-              datum={data}
-              loadingState={isModalLoading}
-            />
           </StyledCentered>
         </StyledVertical>
       </StyledJoin>

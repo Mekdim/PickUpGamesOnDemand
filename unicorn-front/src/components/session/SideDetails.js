@@ -66,8 +66,7 @@ const StyledFiledValue = styled.h5`
 `;
 
 const fetchUsers = () => {
-  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080"
-  return fetch(`${backEndUrl}/users/all`, {
+  return fetch(`http://localhost:8080/users/all`, {
     method: "GET",
   })
     .then((res) => {
@@ -87,7 +86,7 @@ const fetchUsers = () => {
 const SideDetails = ({ date, location, sessionId }) => {
   const [open, setOpen] = useState(false);
   const [users, setUsers] = useState([]);
-  const [backEndUrl, setBackEndUrl] = useState("http://localhost:8080");
+
   useEffect(async () => {
     try {
       let allUsers = await fetchUsers();
