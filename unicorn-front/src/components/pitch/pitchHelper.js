@@ -1,8 +1,8 @@
 const fetchEvents = ({ date, pitchId }) => {
   let urlDate = convertDate(new Date(date));
-
+  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080";
   return fetch(
-    `http://localhost:8080/pitch/${pitchId}/${urlDate}/sessions/days`,
+    `${backEndUrl}/pitch/${pitchId}/${urlDate}/sessions/days`,
     {
       method: "GET",
     }

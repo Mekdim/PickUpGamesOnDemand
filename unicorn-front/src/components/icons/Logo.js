@@ -1,5 +1,5 @@
 import SvgIcon from "@mui/material/SvgIcon";
-import LogoSvg from "../../images/Logo64.svg";
+import { ReactComponent as LogoSvg } from "../../img/Logo64.svg";
 import React from "react";
 
 const Logo = () => (

@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 export const fetchNotification = (playerId) => {
-  return fetch(`http://localhost:8080/users/notifications/${playerId}`, {
+  let backEndUrl = process.env.REACT_APP_backEndUrl ||  "http://localhost:8080";
+  return fetch(`${backEndUrl}/users/notifications/${playerId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +21,8 @@ export const getUserProfile = (userUId) => {
       " we could get your stored sessionin  data . Please try logging in again "
     );
   }
-  return fetch("http://localhost:8080/users/getProfile/" + userUId, {
+  let backEndUrl = process.env.REACT_APP_backEndUrl ||  "http://localhost:8080";
+  return fetch(`${backEndUrl}/users/getProfile/` + userUId, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -38,7 +40,8 @@ export const getUserProfile = (userUId) => {
 
 export const logOutUser = () => {
   let access_token = Cookies.get("accessToken");
-  return fetch("http://localhost:8080/tokens/logout", {
+  let backEndUrl = process.env.REACT_APP_backEndUrl ||  "http://localhost:8080";
+  return fetch(`${backEndUrl}/tokens/logout`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -58,7 +61,8 @@ export const logOutUser = () => {
 
 export const refreshTheToken = () => {
   let refresh_token = Cookies.get("refreshToken");
-  return fetch("http://localhost:8080/tokens/refreshTheToken", {
+  let backEndUrl = process.env.REACT_APP_backEndUrl ||  "http://localhost:8080";
+  return fetch(`${backEndUrl}/tokens/refreshTheToken`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -77,7 +81,8 @@ export const refreshTheToken = () => {
 };
 
 export const getTokensOnLogin = (userUId) => {
-  return fetch("http://localhost:8080/tokens/login/", {
+  let backEndUrl = process.env.REACT_APP_backEndUrl ||  "http://localhost:8080";
+  return fetch(`${backEndUrl}/tokens/login/`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -96,8 +101,9 @@ export const getTokensOnLogin = (userUId) => {
 };
 
 export const clearNotification = (notificationId) => {
+  let backEndUrl = process.env.REACT_APP_backEndUrl ||  "http://localhost:8080";
   return fetch(
-    "http://localhost:8080/users/notifications/update/" + notificationId,
+    `${backEndUrl}/users/notifications/update` + notificationId,
     {
       method: "PUT",
     }
@@ -109,8 +115,9 @@ export const clearNotification = (notificationId) => {
 };
 
 export const clearAllNotifications = (notifications) => {
+  let backEndUrl = process.env.REACT_APP_backEndUrl ||  "http://localhost:8080";
   let body = { ids: notifications };
-  return fetch("http://localhost:8080/users/notifications/update", {
+  return fetch(`${backEndUrl}/users/notifications/update`, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",

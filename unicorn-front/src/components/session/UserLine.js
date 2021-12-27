@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar } from "@mui/material";
+import { Avatar, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 
 const StyledName = styled.h4`

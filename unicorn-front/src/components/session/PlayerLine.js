@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Avatar } from "@mui/material";
+import { Avatar, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
