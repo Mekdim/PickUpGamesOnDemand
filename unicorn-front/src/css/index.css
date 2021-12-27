@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url(../fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Nova_Mono';
+  src: local('Nova_Mono'), url(../fonts/Nova_Mono/NovaMono-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: local('Ubuntu'), url(../fonts/Ubuntu/Ubuntu-Regular.ttf) format('truetype');
+}
+

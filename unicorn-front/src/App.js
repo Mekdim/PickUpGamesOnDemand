@@ -41,7 +41,6 @@ function App() {
     <Router>
       <ScrollToTop />
       <Switch>
-       <Suspense fallback={() => <div> Loading...</div>}>
         <Route exact path="/">
           <Suspense fallback={() => <div> Loading...</div>}>
             <Home />
@@ -97,7 +96,6 @@ function App() {
             <ContactUs className={"App"} />
           </Suspense>
         </Route>
-        </Suspense>
       </Switch>
     </Router>
   );

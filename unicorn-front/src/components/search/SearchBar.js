@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -82,67 +82,24 @@ const SearchBar = () => {
   const [locationSelected, setLocationSelected] = useState(
     pitchSearched ? pitchSearched : null
   );
-  const [PitchLocations, setPitchLocations] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    let isMounted = true;
-    fetch("http://localhost:8080/pitch/pitches/", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          // throw the promise to catch and
-          // display message from backend API
-          throw response;
-        } else return response.json();
-      })
-      .then((result) => {
-        if (result.length > 0) {
-          const pitches = [];
-          for (let i = 0; i < result.length; i++) {
-            pitches.push({
-              name: result[i].name,
-              type: result[i].type,
-              address: result[i].address,
-              label: result[i].description + " in " + result[i].address + " ",
-              id: result[i].id,
-            });
-          }
-          if (isMounted) {
-            setPitchLocations(pitches);
-          }
-        } else {
-          // no pitch to show so maybe alert? maybe not (just no pitch in the db yet)
-          console.log("no pitch to show on the drop down");
-        }
-      })
-      .catch((error) => {
-        alert(
-          "Sorry, Some server error happended while fetching pitch options. you might be unable to choose pitches"
-        );
-        // if error comes from backend API - we can grab the mesage here or send it to logger in the future
-        if (typeof error.json === "function") {
-          error
-            .json()
-            .then((error) => {
-              //console.log("An API error from backend API while fetching pitches option for userid XXX");
-            })
-            .catch((genericError) => {
-              //console.log("Another error ");
-            });
-        } else {
-          // error status undefined here
-          //console.log("some sort of fetch error happended")
-        }
+  const { pitches } = usePitches();
+  let pitchFormatted = [];
+
+  if (pitches?.length > 0) {
+    const values = [];
+    for (let i = 0; i < pitches.length; i++) {
+      values.push({
+        name: pitches[i].name,
+        type: pitches[i].type,
+        address: pitches[i].address,
+        label: pitches[i].description + " in " + pitches[i].address + " ",
+        id: pitches[i].id,
       });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+    }
+    pitchFormatted = values;
+  }
 
   return (
     <Box>
@@ -153,7 +110,7 @@ const SearchBar = () => {
             isOptionEqualToValue={(option, value) => option.id === value.id}
             PopperComponent={PopperMy}
             id="combo-box-demo"
-            options={PitchLocations}
+            options={pitchFormatted}
             value={locationSelected ? locationSelected : pitchSearched}
             onChange={(event, newValue) => {
               setLocationSelected(newValue);
