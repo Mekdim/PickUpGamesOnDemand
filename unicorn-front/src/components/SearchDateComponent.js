@@ -34,8 +34,6 @@ function SearchDateComponent() {
   const [PitchLocations, setPitchLocations] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const [backEndUrl, setBackEndUrl] = useState(process.env.backEndUrl || "http://localhost:8080");
-
   const { moment } = new DateAdapter({ instance: momentTimezone });
   // search pitches based on date and location selected
   const getPitches = () => {
@@ -44,11 +42,11 @@ function SearchDateComponent() {
       return;
     }
 
-    var url = `${backEndUrl}/pitch/pitches/`;
+    var url = "http://localhost:8080/pitch/pitches/";
     console.log(locationSelected);
     const formatedDate = date.format("YYYY-MM-DD");
     if (locationSelected) {
-      url = `${backEndUrl}/pitch/pitches/` + locationSelected.id + "/";
+      url = "http://localhost:8080/pitch/pitches/" + locationSelected.id + "/";
     }
 
     const dayofweek = {

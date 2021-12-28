@@ -1,5 +1,5 @@
 import SvgIcon from "@mui/material/SvgIcon";
-import { ReactComponent as Player } from "../../img/soccer.svg";
+import Player from "../../images/soccer.svg";
 import React from "react";
 
 const Soccer = () => (

@@ -20,7 +20,7 @@ function SignUp() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
+
 
   const recaptchaVerifierSimple = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
@@ -115,7 +115,7 @@ function SignUp() {
           return
         }
         setLoading(true)
-        fetch(`${backEndUrl}/users/addProfile`, {
+        fetch('http://localhost:8080/users/addProfile', {
           method: "POST",
           headers: {
             'Content-type': 'application/json'
@@ -193,7 +193,7 @@ function SignUp() {
         <Formik initialValues={{ email: "", password: '', firstname: "", lastname: '' }} onSubmit={submit}>
           {(props) => (
             <Form>
-              {phoneVerified ? (
+              {!phoneVerified ? (
                 <>
                   <Field  as={TextField} label="Phone Number" name="Phone Number" placeholder="Example +251918224567" type="phonenumber" fullWidth required variant="standard" style={{ backgroundColor: "#f7f7f7", marginTop: "10px", marginBottom: "10px" }} onChange={(event) => { setPhoneNumber(event.target.value) }} />
                   <p> Your phone number is required for verification purposes. We will be sending you verification code </p>

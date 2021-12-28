@@ -1,5 +1,5 @@
 import SvgIcon from "@mui/material/SvgIcon";
-import { ReactComponent as Participant } from "../../img/face--add.svg";
+import Participant from "../../images/faceAdd.svg";
 import React from "react";
 
 const Player = () => (

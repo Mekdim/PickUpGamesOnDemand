@@ -278,7 +278,6 @@ const PitchSession = ({ pitchId, date }) => {
   const [open, setOpen] = useState(false);
   const [events, setEvents] = useState([]);
   const [currentDate, setCurrentDate] = useState(date);
-  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
   const history = useHistory();
   const [nextDate, setNextDate] = useState(
     addDay({ date: date, numberOfDays: 1 })
@@ -308,7 +307,7 @@ const PitchSession = ({ pitchId, date }) => {
   const { pitch, isLoading, isError } = usePitchData(pitchId);
 
   useEffect(() => {
-    fetch(`${backEndUrl}/pitch/${pitchId}/${date}/sessions/days`, {
+    fetch(`http://localhost:8080/pitch/${pitchId}/${date}/sessions/days`, {
       method: "GET",
     })
       .then((res) => {
