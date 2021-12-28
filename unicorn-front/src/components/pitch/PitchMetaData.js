@@ -11,6 +11,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import usePitchData from "./hooks/usePitchData";
+import Loader from "../Loader";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 

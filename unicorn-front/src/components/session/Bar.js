@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { LoadingButton } from "@mui/lab";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useHistory } from "react-router-dom";
+import { useStateValue } from "../../StateProvider";
 import { SessionContext } from "./SessionContext";
 import { refreshTheToken } from "../logic/logic";
 
@@ -81,7 +82,7 @@ const Bar = ({ sessionId }) => {
   const [failed, setFailed] = useState(false);
   const [isJoining, setIsJoining] = useState(false);
   const [joined, setJoined] = useState(false);
-
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
   const disableStatus = useMemo(() => {
     return disableButton({
       joined,
@@ -90,7 +91,7 @@ const Bar = ({ sessionId }) => {
     });
   }, [session, joined]);
 
-  const handleJoin = (refreshEnabled = true) => {
+  const handleJoin = (refreshEnabled=true) => {
     let body = {
       session_id: sessionId,
       player_id: Cookies.get("id"),
@@ -101,41 +102,42 @@ const Bar = ({ sessionId }) => {
     }
 
     setIsJoining(true);
-    let bearer_token = Cookies.get("accessToken");
-    if (!bearer_token) {
-      alert(
-        " we couldnt get your stored sessionin  data . Please try logging in again "
-      );
-    }
-    fetch(`http://localhost:8080/pitch/joinSession`, {
+    let bearer_token = Cookies.get('accessToken')
+       if (!bearer_token){
+          alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
+       } 
+    fetch(`${backEndUrl}/pitch/joinSession`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + bearer_token,
+        "Authorization":  'Bearer ' + bearer_token
       },
       body: JSON.stringify(body),
     })
       .then(async (res) => {
+
         if (res.status == 403 && refreshEnabled) {
+         
           //  return "Token expired error"
-          let tokens = await refreshTheToken();
-          if (!tokens) {
-            console.log(
-              "We couldnt get new tokens and refresh token for you. We are not able to let you join session  at the moment."
-            );
-            setFailed(true);
-            setIsJoining(false);
-            setJoined(false);
-            return;
-            //alert("We couldnt get new tokens and refresh token for you. Sorry")
-          }
-          Cookies.set("accessToken", tokens.accessToken);
-          Cookies.set("refreshToken", tokens.refreshToken);
-          handleJoin(false);
-          return;
+          let tokens = await refreshTheToken()
+            if (!tokens){
+              console.log("We couldnt get new tokens and refresh token for you. We are not able to let you join session  at the moment.")
+              setFailed(true);
+              setIsJoining(false);
+              setJoined(false);
+              return
+              //alert("We couldnt get new tokens and refresh token for you. Sorry")
+            }
+            Cookies.set('accessToken', tokens.accessToken)
+            Cookies.set('refreshToken', tokens.refreshToken)
+            handleJoin(false)
+            return
+
         }
         if (!res.ok) {
-          throw new Error("Sorry! We are not able to let you join a session");
+          throw new Error(
+            "Sorry! We are not able to let you join a session"
+          );
         }
 
         setFailed(false);

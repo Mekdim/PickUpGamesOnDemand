@@ -41,7 +41,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <Switch>
-      <Suspense fallback={() => <div> Loading...</div>}>
+       <Suspense fallback={() => <div> Loading...</div>}>
         <Route exact path="/">
           <Suspense fallback={() => <div> Loading...</div>}>
             <Home />

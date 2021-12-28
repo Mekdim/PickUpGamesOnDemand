@@ -33,13 +33,14 @@ function MessageBoard({ sessionId }) {
   const [profileDetails, setProfileDetails] = useState({});
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
   const refOfLastMessage = useRef();
   const fetchUserInfo = ()=>{
     let bearer_token = Cookies.get('accessToken')
      if (!bearer_token){
         alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
      } 
-    return fetch('http://localhost:8080/users/getProfile/' + userId, {
+    return fetch(`${backEndUrl}/users/getProfile/` + userId, {
       method: "GET",
       headers: {
         'Content-type': 'application/json',
@@ -67,7 +68,7 @@ const getUserPhoto = (id)=>{
      if (!bearer_token){
         alert(" we could get your stored sessionin  data . Please try logging in again ")
     } 
-    return fetch('http://localhost:8080/users/getProfilePicture/' + id, {
+    return fetch(`${backEndUrl}/users/getProfilePicture/` + id, {
       method: "GET",
       headers: {
         'Content-type': 'application/json',

@@ -140,10 +140,7 @@ export default function Picker({ date, setDate }) {
           <CalendarPicker
             minDate={moment(new Date().getDate(), "DD/MM/YYYY")}
             date={date}
-            onChange={(newDate) => {
-              setDate(newDate);
-              handleClose();
-            }}
+            onChange={(newDate) => setDate(newDate)}
           />
         </LocalizationProvider>
       </StyledPopover>
