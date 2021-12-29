@@ -83,7 +83,7 @@ const SessionPill = ({ name, number, height, sessionId }) => {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState({});
   const [isModalLoading, setIsModalLoading] = React.useState(true);
-
+  const [backEndUrl, setBackEndUrl] = React.useState(process.env.REACT_APP_backEndUrl ||  "http://localhost:8080");
   const { pitch } = useContext(PitchContext);
   const history = useHistory();
 
@@ -95,7 +95,7 @@ const SessionPill = ({ name, number, height, sessionId }) => {
   };
 
   const handleOpen = () => {
-    fetch(`http://localhost:8080/pitch/sessions/${sessionId}`, {
+    fetch(`${backEndUrl}/pitch/sessions/${sessionId}`, {
       method: "GET",
     })
       .then((res) => {

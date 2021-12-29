@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-
+const webpack = require("webpack");
 module.exports = {
   entry: {
     home: "./src/index.js",
@@ -45,6 +45,9 @@ module.exports = {
       favicon: path.resolve(__dirname, "public", "favicon.ico"),
       filename: "index.html",
     }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env)
+  }),
   ],
   module: {
     rules: [

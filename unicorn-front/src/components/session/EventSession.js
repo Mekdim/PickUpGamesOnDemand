@@ -110,7 +110,8 @@ const StyledChat = styled.div`
 `;
 
 const fetchSessionData = ({ sessionId }) => {
-  return fetch(`http://localhost:8080/pitch/sessions/${sessionId}`, {
+  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080"
+  return fetch(`${backEndUrl}/pitch/sessions/${sessionId}`, {
     method: "GET",
   })
     .then((res) => {
@@ -130,7 +131,7 @@ const fetchSessionData = ({ sessionId }) => {
 const EventSession = ({ sessionId }) => {
   const [sessionData, setSessionData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
+  const [backEndUrl, setBackEndUrl] = useState("http://localhost:8080");
   useEffect(async () => {
     try {
       setIsLoading(true);

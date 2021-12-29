@@ -81,7 +81,7 @@ const Bar = ({ sessionId }) => {
   const [failed, setFailed] = useState(false);
   const [isJoining, setIsJoining] = useState(false);
   const [joined, setJoined] = useState(false);
-
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
   const disableStatus = useMemo(() => {
     return disableButton({
       joined,
@@ -101,13 +101,11 @@ const Bar = ({ sessionId }) => {
     }
 
     setIsJoining(true);
-    let bearer_token = Cookies.get("accessToken");
-    if (!bearer_token) {
-      alert(
-        " we couldnt get your stored sessionin  data . Please try logging in again "
-      );
-    }
-    fetch(`http://localhost:8080/pitch/joinSession`, {
+    let bearer_token = Cookies.get('accessToken')
+       if (!bearer_token){
+          alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
+       } 
+    fetch(`${backEndUrl}/pitch/joinSession`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

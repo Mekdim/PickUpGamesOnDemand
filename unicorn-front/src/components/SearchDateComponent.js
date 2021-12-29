@@ -34,6 +34,8 @@ function SearchDateComponent() {
   const [PitchLocations, setPitchLocations] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [backEndUrl, setBackEndUrl] = useState(process.env.REACT_APP_backEndUrl  || "http://localhost:8080");
+
   const { moment } = new DateAdapter({ instance: momentTimezone });
   // search pitches based on date and location selected
   const getPitches = () => {
@@ -42,11 +44,11 @@ function SearchDateComponent() {
       return;
     }
 
-    var url = "http://localhost:8080/pitch/pitches/";
+    var url = `${backEndUrl}/pitch/pitches/`;
     console.log(locationSelected);
     const formatedDate = date.format("YYYY-MM-DD");
     if (locationSelected) {
-      url = "http://localhost:8080/pitch/pitches/" + locationSelected.id + "/";
+      url = `${backEndUrl}/pitch/pitches/` + locationSelected.id + "/";
     }
 
     const dayofweek = {
@@ -139,7 +141,7 @@ function SearchDateComponent() {
 
   // useEffect - run on first render fetch pitch options first
   useEffect(() => {
-    fetch("http://localhost:8080/pitch/pitches/", {
+    fetch(`${backEndUrl}/pitch/pitches/`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
