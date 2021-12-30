@@ -71,7 +71,7 @@ export default function HeaderBar({ showSearchBar = false }) {
   const [state, dispatch] = useStateValue();
   const [anchorEl, setAnchorEl] = useState(null);
   const [user, setuser] = useState(
-    state.user?.uid || Cookies.get("uid") || null
+    state.user?.id || Cookies.get("id") || null
   );
   const open = Boolean(anchorEl);
 
@@ -121,6 +121,8 @@ export default function HeaderBar({ showSearchBar = false }) {
         Cookies.remove("uid");
         Cookies.remove("firstname");
         Cookies.remove("id");
+        Cookies.remove("accessToken")
+        Cookies.remove("refreshToken")
         history.push("/signin");
       })
       .catch((error) => {

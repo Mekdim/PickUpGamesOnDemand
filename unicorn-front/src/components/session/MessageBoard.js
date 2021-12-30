@@ -11,14 +11,15 @@ import Cookies, { set } from "js-cookie";
 import Loader from "../Loader";
 import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
-import { refreshTheToken } from "../logic/logic";
+import { getUserIds, refreshTheToken } from "../logic/logic";
+import { actionTypes } from "../../reducer";
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
 function MessageBoard({ sessionId }) {
   const [state, dispatch] = useStateValue();
   const [userId, setUserId] = useState(
-    state.user?.uid || Cookies.get("uid") || null
+    state.user?.uid || null
   );
   const [id, setId] = useState(state.user?.id || Cookies.get("id") || null);
   const messageRef = firestore
@@ -40,6 +41,9 @@ function MessageBoard({ sessionId }) {
      if (!bearer_token){
         alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
      } 
+     if (userId==null){
+       return []
+     }
     return fetch(`${backEndUrl}/users/getProfile/` + userId, {
       method: "GET",
       headers: {
@@ -77,6 +81,11 @@ const getUserPhoto = (id)=>{
       //phone number has to be inserted properly as well on sign up
 
     }).then((response) => {
+      if (response.status == 403) {
+        // throw the promise to catch and
+        // display message from backend API
+        return "Token expired error"
+      }
       if (!response.ok) {
         // throw the promise to catch and
         // display message from backend API
@@ -85,6 +94,57 @@ const getUserPhoto = (id)=>{
       else
         return response.json()
     })
+}
+const getUid = async (refreshEnabled=true)=>{
+  try {
+    let result = await getUserIds()
+    if (result=="Token expired error" && refreshEnabled){
+      let tokens = await refreshTheToken()
+      console.log("here are the tokens", tokens)
+      if (!tokens){
+        console.log("We couldnt get new tokens and refresh token for you. Sorry")
+        return
+        //alert("We couldnt get new tokens and refresh token for you. Sorry")
+      }
+      Cookies.set('accessToken', tokens.accessToken)
+      Cookies.set('refreshToken', tokens.refreshToken)
+      getUid(false)
+    }
+    else if (result && result.uid) {
+      setUserId(result.uid)
+      console.log(result)
+      const loggedUser = {
+       
+        uid: result.uid,
+    
+        firstname: result.firstname,
+        lastname: result.lastname,
+        id: result.id,
+      };
+      
+      dispatch({
+        type: actionTypes.SET_USER,
+        user: loggedUser,
+      });
+    }
+
+  }catch(error){
+    console.log(error)
+    alert("Sorry, Some server error happended while fetching unique user id! Try logging in again")
+      // if error comes from backend API - we can grab the mesage here or send it to logger in the future
+      if (typeof error.json === "function") {
+        error.json().then(error => {
+          //console.log("An API error from backend API while fetching user in for userid XXX");
+        }).catch(genericError => {
+          //console.log("Another error ");
+        });
+      }
+      else{
+        // error status undefined here
+        //console.log("some sort of fetch error happended")
+      }
+
+  }
 }
 const fetchProfileInfoAndPicture = async (refreshEnabled=true)=>{
 
@@ -144,18 +204,19 @@ const fetchProfileInfoAndPicture = async (refreshEnabled=true)=>{
     
 }
   // run  on the first render
-  useEffect(fetchProfileInfoAndPicture, []);
+  useEffect(fetchProfileInfoAndPicture, [userId]);
+  useEffect(getUid, []);
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    //const [uid, photoURL] = auth.currentUser
+    //const [uxid, photoURL] = auth.currentUser
     if (formValue == "") {
       alert("Please Enter a text message before you send!");
       return;
     }
-    if (!profileDetails.firstName) {
+    if (!profileDetails.firstName || userId==null) {
       alert(
-        "Some Error happened sending your message. We couldnt grab your first name or last name. Try refreshing again! "
+        "Some Error happened sending your message. We couldnt grab your first name, last name or unique id. Try refreshing again! "
       );
       return;
     }
@@ -205,10 +266,11 @@ const fetchProfileInfoAndPicture = async (refreshEnabled=true)=>{
 }
 function ChatMessage({ message }) {
   const [state] = useStateValue();
-  const [userId] = useState(state.user?.uid || Cookies.get("uid") || null);
+  const [userId] = useState(state.user?.uid || null);
   // const [id, setId] = useState(state.user?.id || Cookies.get("id") || null);
   const { text, uid, photoURL, firstName, lastName } = message;
   const messageClass = uid === userId ? "sent" : "received";
+
   return (
     <div className={`message ${messageClass}`}>
       <div className="messageImageAndName">

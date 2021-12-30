@@ -8,7 +8,8 @@ import 'firebase/compat/storage'
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Loader from './Loader'
-import { refreshTheToken } from "./logic/logic";
+import { refreshTheToken, getUserIds } from "./logic/logic";
+import { actionTypes } from "../reducer";
 function ProfilePage() {
   const storage = firebase.storage();
   const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ function ProfilePage() {
   const [profileImage, setProfileImage] = useState('');
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [state, dispatch] = useStateValue();
-  const [userId, setUserId] = useState(state.user?.uid || Cookies.get("uid") || null);
+  const [userId, setUserId] = useState(state.user?.uid || null);
   const [id, setId] = useState(state.user?.id || Cookies.get("id") || null);
   const [profileUpdated, setProfileUpdated] = useState(null);
   const [firstname, setFirstName] = useState(null);
@@ -179,8 +180,66 @@ function ProfilePage() {
       }
       setOpen(false);
     };
-
+    const getUid = async (refreshEnabled=true)=>{
+      // if user id exists no need to get user id
+      if (userId){
+        return
+      }
+      try {
+        let result = await getUserIds()
+        if (result=="Token expired error" && refreshEnabled){
+          let tokens = await refreshTheToken()
+          console.log("here are the tokens", tokens)
+          if (!tokens){
+            console.log("We couldnt get new tokens and refresh token for you. Sorry")
+            return
+            //alert("We couldnt get new tokens and refresh token for you. Sorry")
+          }
+          Cookies.set('accessToken', tokens.accessToken)
+          Cookies.set('refreshToken', tokens.refreshToken)
+          getUid(false)
+        }
+        else if (result && result.uid) {
+          setUserId(result.uid)
+          console.log(result)
+          const loggedUser = {
+           
+            uid: result.uid,
+        
+            firstname: result.firstname,
+            lastname: result.lastname,
+            id: result.id,
+          };
+          
+          dispatch({
+            type: actionTypes.SET_USER,
+            user: loggedUser,
+          });
+        }
+    
+      }catch(error){
+        console.log(error)
+        alert("Sorry, Some server error happended while fetching unique user id! Try logging in again")
+          // if error comes from backend API - we can grab the mesage here or send it to logger in the future
+          if (typeof error.json === "function") {
+            error.json().then(error => {
+              //console.log("An API error from backend API while fetching user in for userid XXX");
+            }).catch(genericError => {
+              //console.log("Another error ");
+            });
+          }
+          else{
+            // error status undefined here
+            //console.log("some sort of fetch error happended")
+          }
+    
+      }
+    }
   const fetchUserInfo = ()=>{
+    // if user id hasnt been fetched return empty array
+    if (userId==null){
+      return []
+    }
       let bearer_token = Cookies.get('accessToken')
        if (!bearer_token){
           alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
@@ -292,7 +351,9 @@ function ProfilePage() {
   }
   
   // run  on the first render and as profile gets updated
-  useEffect(FetchProfileInfoAndPicture, [profileUpdated])
+  useEffect(FetchProfileInfoAndPicture, [profileUpdated, userId])
+  useEffect(getUid, [])
+
 
   return (
   <div>

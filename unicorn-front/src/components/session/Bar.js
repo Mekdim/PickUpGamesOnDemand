@@ -71,7 +71,9 @@ const disableButton = ({ joined, sessionData, loggedInUser = null }) => {
   let user = sessionData.players.find(
     (ply) => Number(ply.player_id) === Number(loggedInUser)
   );
-
+  if (sessionData.players.length == 22){
+    return true
+  }
   return user !== undefined;
 };
 

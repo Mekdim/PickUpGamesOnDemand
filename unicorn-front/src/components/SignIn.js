@@ -90,7 +90,6 @@ function SignIn() {
             };
             Cookies.set("firstname", result[0].first_name);
             Cookies.set("email", user.email);
-            Cookies.set("uid", user.uid);
             Cookies.set("id", result[0].id);
             dispatch({
               type: actionTypes.SET_USER,

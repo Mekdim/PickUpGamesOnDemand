@@ -30,6 +30,40 @@ export const getUserProfile = (userUId) => {
     },
     // Mark: phone number has to be inserted properly as well on sign up
   }).then((response) => {
+    if (response.status == 403) {
+      // throw the promise to catch and
+      // display message from backend API
+      return "Token expired error"
+    }
+     if (!response.ok) {
+      // throw the promise to catch and
+      // display message from backend API
+      throw response;
+    } else return response.json();
+  });
+};
+
+export const getUserIds = () => {
+  let bearer_token = Cookies.get("accessToken");
+  if (!bearer_token) {
+    alert(
+      " we could get your stored sessionin  data . Please try logging in again "
+    );
+  }
+  let backEndUrl = process.env.REACT_APP_backEndUrl ||  "http://localhost:8080";
+  return fetch(`${backEndUrl}/users/getUserIds/`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: "Bearer " + bearer_token,
+    },
+    // Mark: phone number has to be inserted properly as well on sign up
+  }).then((response) => {
+    if (response.status == 403) {
+      // throw the promise to catch and
+      // display message from backend API
+      return "Token expired error"
+    }
     if (!response.ok) {
       // throw the promise to catch and
       // display message from backend API

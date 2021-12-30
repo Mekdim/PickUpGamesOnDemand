@@ -43,7 +43,7 @@ function Header(props) {
 
   const [state, dispatch] = useStateValue();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [user, setuser] = useState(state.user?.uid || Cookies.get('uid') || null);
+  const [user, setuser] = useState(state.user?.id || Cookies.get('id') || null);
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
