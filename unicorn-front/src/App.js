@@ -84,7 +84,7 @@ function App() {
         </Route>
         <Route path="/privacy">
           <Suspense fallback={() => <div> Loading...</div>}>
-            <Privacy />
+            <Terms />
           </Suspense>
         </Route>
         <Route path="/aboutus">
