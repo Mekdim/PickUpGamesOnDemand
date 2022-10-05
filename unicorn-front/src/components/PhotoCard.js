@@ -1,11 +1,11 @@
-import React from "react";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
-import "../css/Pulse.css";
+import React from 'react';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import styled from '@emotion/styled';
+import '../css/Pulse.css';
 
 const CardContentStyled = styled(CardContent)`
   display: flex;
@@ -28,11 +28,11 @@ const PhotoCard = ({ src, name, description }) => {
           height="150"
           image={src}
           alt="Pitch"
-          sx={{ "object-fit": "cover", width: "100%" }}
+          sx={{ objectFit: 'cover', width: '100%' }}
         />
         <CardContentStyled>
           <Typography
-            sx={{ color: "primary", font: "bold", "font-size": "15px" }}
+            sx={{ color: 'primary', font: 'bold', fontSize: '15px' }}
             gutterBottom
             variant="body"
             component="div"

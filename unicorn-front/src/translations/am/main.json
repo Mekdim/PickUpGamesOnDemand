@@ -1,0 +1,64 @@
+{
+  "welcome": {
+    "title": "ንቁ እና ጤናማ ይሁኑ",
+    "subTitle": "ኳስ ለመጫወት ዝግጁ ኖት ?",
+    "featured": "የተመረጡ የመጫወቻ ቦታዎች",
+    "gallery": "የፍቶ ስብስቦች"
+  },
+  "searchBar": {
+    "locationPlaceHolder": "የት ?",
+    "locationLabel": "ቦታ",
+    "date": "ቀን",
+    "time": "መቼ ?",
+    "searchButton": "ፈልግ"
+  },
+  "footer": {
+    "title": "ስለኛ",
+    "aboutUs": "ስለኛ",
+    "contactUs": "ያግኙን",
+    "howItWorks": "እንዴት እንደሚሰራ",
+    "host": "ጨዋታዎች አስተናግዱ",
+    "terms": "መመሪያ",
+    "privacy": "ግለኝነት"
+  },
+  "pitchCard": {
+    "capacity": "አቅም",
+    "price": "ዋጋ"
+  },
+  "calendar": {
+    "Mon": "ሰኞ",
+    "Tue": "ማክሰኞ",
+    "Wed": "እሮብ",
+    "Thu": "ሐሙስ",
+    "Fri": "አርብ",
+    "Sat": "ቅዳሜ",
+    "Sun": "እሁድ"
+  },
+  "addModal": {
+    "title": "የጨዋታ ጊዜ ፍጠር",
+    "name": "የጨዋታ ስም",
+    "placeHolder": "ምሳሌ የጠዋት ጨዋታ",
+    "date": "ቀን",
+    "startTime": "የሚጀምርበት ሰዓት",
+    "endTime": "የሚያልቅበት ሰዓት",
+    "create": "ፍጠር!",
+    "creating": "የጨዋታ ጊዜ በመፍጠር ሂደት  ላይ..."
+  },
+  "session": {
+    "join": "ተቀላቀል!",
+    "joining": "በመቀላቀል  ሂደት ላይ...",
+    "time": "ሰዓት : ",
+    "price": "ዋጋ : ",
+    "participants": "ተጫዋቾች : ",
+    "dateAndTime": "ቀን እና ሰዓት",
+    "location": "ቦታ",
+    "add": "ተጫዋቾችን አስገቡ!",
+    "invite": "ተጫዋቾችን ጋብዙ",
+    "post": "መልእክት ይለጥፉ",
+    "send": "ላክ",
+    "playerList": "የተጫዋቾች ዝርዝር",
+    "confirmed": "የተረጋገጠ",
+    "invited": "ተጋብዟል",
+    "leave": "ጨዋታውን ለቀው ይውጡ"
+  }
+}

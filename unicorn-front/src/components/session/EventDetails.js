@@ -1,7 +1,8 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Duration from "../modal/Duration";
-import Divider from "@mui/material/Divider";
+import React from 'react';
+import styled from '@emotion/styled';
+import Duration from '../modal/Duration';
+import Divider from '@mui/material/Divider';
+import { useTranslation } from 'react-i18next';
 
 const StyledDetails = styled.div`
   display: flex;
@@ -26,13 +27,13 @@ const StyledDetailsSecondary = styled.div`
 `;
 
 const StyledTitle = styled.h3`
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   width: 100%;
   text-align: left;
 `;
 
 const StyledPrice = styled.p`
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   width: 100%;
 `;
 const StyledEventDate = styled.div`
@@ -92,14 +93,14 @@ const StyledMonth = styled.h5`
   padding: 0;
   margin: 0;
   text-align: left;
-  font-family: "Nova Mono", monospace;
+  font-family: 'Nova Mono', monospace;
 `;
 
 const StyledDate = styled.p`
   padding: 0;
   margin: 0;
   text-align: left;
-  font-family: "Nova Mono", monospace;
+  font-family: 'Nova Mono', monospace;
 `;
 
 const EventDetails = ({
@@ -112,8 +113,9 @@ const EventDetails = ({
 }) => {
   let dd = new Date(date);
   let currentDate = dd.getDate();
-  const monthShort = new Intl.DateTimeFormat("en-US", {
-    month: "short",
+  const { t } = useTranslation('main');
+  const monthShort = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
   }).format(dd);
   return (
     <StyledDetails>
@@ -127,19 +129,19 @@ const EventDetails = ({
         <StyledTitle>{title}</StyledTitle>
         <Divider flexItem />
         <StyledFields>
-          <StyledDurationField>{"Time : "}</StyledDurationField>
+          <StyledDurationField>{t('session.time')}</StyledDurationField>
           <StyledContainer>
             <Duration startTime={startTime} endTime={endTime} />
           </StyledContainer>
         </StyledFields>
         <StyledFields>
-          <StyledFieldName>{"Price : "}</StyledFieldName>
-          <Divider variant={"middle"} orientation={"vertical"} flexItem />
+          <StyledFieldName>{t('session.price')}</StyledFieldName>
+          <Divider variant={'middle'} orientation={'vertical'} flexItem />
           <StyledFieldContainer>{price}</StyledFieldContainer>
         </StyledFields>
         <StyledFields>
-          <StyledFieldName>{"Participants : "}</StyledFieldName>
-          <Divider variant={"middle"} orientation={"vertical"} flexItem />
+          <StyledFieldName>{t('session.participants')}</StyledFieldName>
+          <Divider variant={'middle'} orientation={'vertical'} flexItem />
           <StyledFieldContainer>{participants}</StyledFieldContainer>
         </StyledFields>
       </StyledDetailsSecondary>

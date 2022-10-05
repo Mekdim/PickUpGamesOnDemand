@@ -1,12 +1,9 @@
 const fetchEvents = ({ date, pitchId }) => {
   let urlDate = convertDate(new Date(date));
-  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080";
-  return fetch(
-    `${backEndUrl}/pitch/${pitchId}/${urlDate}/sessions/days`,
-    {
-      method: "GET",
-    }
-  )
+  let backEndUrl = process.env.REACT_APP_backEndUrl || 'http://localhost:8080';
+  return fetch(`${backEndUrl}/pitch/${pitchId}/${urlDate}/sessions/days`, {
+    method: 'GET',
+  })
     .then((res) => {
       if (!res.ok) {
         throw new Error(res.status);
@@ -17,8 +14,53 @@ const fetchEvents = ({ date, pitchId }) => {
       return data;
     })
     .catch((error) => {
-      console.error("Unable to fetch events ", error);
-      return [[], []];
+      console.error('Unable to fetch events ', error);
+      return [[], [], [], []];
+    });
+};
+
+const fetchBoth = ({ date, pitchId }) => {
+  let urlDate = convertDate(new Date(date));
+  let backEndUrl = process.env.REACT_APP_backEndUrl || 'http://localhost:8080';
+  return fetch(`${backEndUrl}/pitch/${pitchId}/${urlDate}/all`, {
+    method: 'GET',
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(res.status);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.error('Unable to fetch events ', error);
+      return [
+        [[], [], [], []],
+        [[], [], [], []],
+      ];
+    });
+};
+
+const fetchHours = ({ date, pitchId }) => {
+  let urlDate = convertDate(new Date(date));
+  let backEndUrl = process.env.REACT_APP_backEndUrl || 'http://localhost:8080';
+  return fetch(`${backEndUrl}/pitch/${pitchId}/${urlDate}/openingHours`, {
+    method: 'GET',
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(res.status);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.error('Unable to fetch openingHours ', error);
+      return [[], [], [], []];
     });
 };
 
@@ -27,15 +69,15 @@ const convertDate = (date) => {
   let mm = (date.getMonth() + 1).toString();
   let dd = date.getDate().toString();
 
-  let mmChars = mm.split("");
-  let ddChars = dd.split("");
+  let mmChars = mm.split('');
+  let ddChars = dd.split('');
 
   return (
     yyyy +
-    "-" +
-    (mmChars[1] ? mm : "0" + mmChars[0]) +
-    "-" +
-    (ddChars[1] ? dd : "0" + ddChars[0])
+    '-' +
+    (mmChars[1] ? mm : '0' + mmChars[0]) +
+    '-' +
+    (ddChars[1] ? dd : '0' + ddChars[0])
   );
 };
 
@@ -64,4 +106,6 @@ module.exports = {
   topShiftMultiplier,
   fetchEvents,
   convertDate,
+  fetchHours,
+  fetchBoth,
 };

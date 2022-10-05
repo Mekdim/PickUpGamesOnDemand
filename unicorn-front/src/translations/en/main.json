@@ -1,0 +1,64 @@
+{
+  "welcome": {
+    "title": "Stay Active and Healthy",
+    "subTitle": "Are you ready to play the beautiful game?",
+    "featured": "Featured Gaming Grounds",
+    "gallery": "Photo Galleries"
+  },
+  "searchBar": {
+    "locationPlaceHolder": "Where ?",
+    "locationLabel": "Location",
+    "date": "Date",
+    "time": "When ?",
+    "searchButton": "Search"
+  },
+  "footer": {
+    "title": "About Us",
+    "aboutUs": "About us",
+    "contactUs": "Contact us",
+    "howItWorks": "How it works",
+    "host": "Host Games",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  },
+  "pitchCard": {
+    "capacity": "Capacity",
+    "price": "Price"
+  },
+  "calendar": {
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun"
+  },
+  "addModal": {
+    "title": "Create a session",
+    "name": "Session name",
+    "placeHolder": "eg. Morning session",
+    "date": "Date",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "create": "Create!",
+    "creating": "Creating..."
+  },
+  "session": {
+    "join": "Join!",
+    "joining": "Joining...",
+    "time": "Time : ",
+    "price": "Price : ",
+    "participants": "Participants : ",
+    "dateAndTime": "Date and Time",
+    "location": "Location",
+    "add": "Add Participants!",
+    "invite": "Invite Players",
+    "post": "Post your messages here",
+    "send": "Send",
+    "playerList": "List of Players",
+    "confirmed": "Confirmed",
+    "invited": "Invited",
+    "leave": "Leave Session"
+  }
+}

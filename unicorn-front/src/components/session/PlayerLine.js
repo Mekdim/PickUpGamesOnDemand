@@ -1,9 +1,11 @@
-import React, { useCallback, useContext, useState } from "react";
-import { Avatar } from "@mui/material";
-import styled from "@emotion/styled";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import { SessionContext } from "./SessionContext";
+import React, { useCallback, useContext, useState } from 'react';
+import { Avatar, Tooltip } from '@mui/material';
+import styled from '@emotion/styled';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import { SessionContext } from './SessionContext';
+import { deleteSession, leaveSession } from './hooks/useLeaveSession';
+import { useTranslation } from 'react-i18next';
 
 const StyledName = styled.h4`
   text-align: left;
@@ -19,10 +21,10 @@ const StyledStatus = styled.p`
   margin-bottom: auto;
   margin-top: auto;
   color: ${(props) => {
-    if (props.status === "confirmed") {
-      return "green";
+    if (props.status === 'Confirmed') {
+      return 'green';
     }
-    return "red";
+    return '#000000bd';
   }};
 `;
 
@@ -56,12 +58,8 @@ const CloseButton = styled.span`
   right: -9px;
   z-index: 4;
   display: ${(props) => {
-    return props.show ? props.show : "none";
+    return props.show ? props.show : 'none';
   }};
-`;
-
-const CloseIonStyled = styled(CloseIcon)`
-  //background-color: #ff8585;
 `;
 
 const CloseIonStyledIconButton = styled(IconButton)`
@@ -86,20 +84,35 @@ const CloseIonStyledIconButton = styled(IconButton)`
 
 const PlayerLine = ({
   name,
-  status = "confirmed",
+  status = 'Confirmed',
   close = false,
   playerId,
+  players,
+  setPlayers,
 }) => {
-  const [display, setDisplay] = useState("none");
+  const [display, setDisplay] = useState('none');
   const { session } = useContext(SessionContext);
-
-  const handleRemove = useCallback(() => {
+  const { t } = useTranslation('main');
+  const handleRemove = useCallback(async () => {
+    let clonedArray = JSON.parse(JSON.stringify(players));
     if (session) {
-      console.log(
-        "Clicked to remove player %s from session id %s ",
-        playerId,
-        session.id
-      );
+      clonedArray = clonedArray.filter((ply) => ply.id !== playerId);
+      if (clonedArray.length === 0) {
+        try {
+          await deleteSession({ sessionId: session.id, playerId: playerId });
+          setPlayers(clonedArray);
+        } catch (deleteSessionError) {
+          console.error('Unable to delete the session ', deleteSessionError);
+        }
+      } else {
+        try {
+          // TODO Check for the player status being Invited or Confirmed before changing the number of players in sessions
+          await leaveSession(session.id, playerId);
+          setPlayers(clonedArray);
+        } catch (leaveSessionError) {
+          console.error('Unable to leave the session ', leaveSessionError);
+        }
+      }
     }
   }, [session]);
 
@@ -107,26 +120,29 @@ const PlayerLine = ({
     <>
       <StyledStack
         onMouseEnter={(e) => {
-          setDisplay("inline-block");
+          setDisplay('inline-block');
         }}
         onMouseLeave={(e) => {
-          setDisplay("none");
+          setDisplay('none');
         }}
       >
         <StyledAvatar>{name.slice(0, 1)}</StyledAvatar>
         <StyledName> {name}</StyledName>
-        <StyledStatus status={status}> {status} </StyledStatus>
+        <StyledStatus status={status}>
+          {t(`session.${status.toLowerCase()}`)}
+        </StyledStatus>
         {close && (
-          <CloseButton show={display}>
-            <CloseIonStyledIconButton
-              // sx={{ backgroundColor: "#ff8585" }}
-              onClick={handleRemove}
-              aria-label="close"
-              size="small"
-            >
-              <CloseIonStyled fontSize={"middle"} />
-            </CloseIonStyledIconButton>
-          </CloseButton>
+          <Tooltip key={1} title={t('session.leave')} placement="left" arrow>
+            <CloseButton show={display}>
+              <CloseIonStyledIconButton
+                onClick={handleRemove}
+                aria-label="close"
+                size="small"
+              >
+                <CloseIcon fontSize={'medium'} />
+              </CloseIonStyledIconButton>
+            </CloseButton>
+          </Tooltip>
         )}
       </StyledStack>
     </>

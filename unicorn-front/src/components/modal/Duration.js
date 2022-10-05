@@ -1,10 +1,11 @@
-import * as React from "react";
-import styled from "@emotion/styled";
-import SportsScoreTwoToneIcon from "@mui/icons-material/SportsScoreTwoTone";
-import SportsSharpIcon from "@mui/icons-material/SportsSharp";
-import Chip from "@mui/material/Chip";
-import Tooltip from "@mui/material/Tooltip";
-import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import * as React from 'react';
+import styled from '@emotion/styled';
+import SportsScoreTwoToneIcon from '@mui/icons-material/SportsScoreTwoTone';
+import SportsSharpIcon from '@mui/icons-material/SportsSharp';
+import Chip from '@mui/material/Chip';
+import Tooltip from '@mui/material/Tooltip';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import { convertTimeStringToAMPM } from '../../utils/utils';
 
 const StyledDuration = styled.div`
   display: flex;
@@ -94,28 +95,28 @@ const StyledBall = styled(SportsSoccerIcon)`
 const Duration = ({ startTime, endTime }) => {
   return (
     <StyledDuration>
-      <Tooltip title="Session Start time!" placement="top" arrow>
+      <Tooltip title="Session Start time!" placement="bottom" arrow>
         <Chip
-          icon={<SportsSharpIcon fontSize={"medium"} />}
-          label={startTime}
-          color={"success"}
-          variant={"outlined"}
+          icon={<SportsSharpIcon fontSize={'medium'} />}
+          label={convertTimeStringToAMPM(startTime)}
+          color={'success'}
+          variant={'outlined'}
         />
       </Tooltip>
       <StyledCenter>
         <StyledTimeLineBox>
           <StyledCircle>
-            <StyledBall fontSize={"small"} />
+            <StyledBall fontSize={'small'} />
           </StyledCircle>
           <StyledTimeLine />
         </StyledTimeLineBox>
       </StyledCenter>
-      <Tooltip title="Session End time!" placement="top" arrow>
+      <Tooltip title="Session End time!" placement="bottom" arrow>
         <Chip
-          icon={<SportsScoreTwoToneIcon fontSize={"medium"} />}
-          label={endTime}
-          color={"error"}
-          variant={"outlined"}
+          icon={<SportsScoreTwoToneIcon fontSize={'medium'} />}
+          label={convertTimeStringToAMPM(endTime)}
+          color={'error'}
+          variant={'outlined'}
         />
       </Tooltip>
     </StyledDuration>

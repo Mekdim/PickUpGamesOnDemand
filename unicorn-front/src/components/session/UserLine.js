@@ -1,6 +1,6 @@
-import React from "react";
-import { Avatar } from "@mui/material";
-import styled from "@emotion/styled";
+import React from 'react';
+import { Avatar } from '@mui/material';
+import styled from '@emotion/styled';
 
 const StyledName = styled.h4`
   text-align: left;
@@ -25,10 +25,10 @@ const StyledStatus = styled.p`
   margin-bottom: auto;
   margin-top: auto;
   color: ${(props) => {
-    if (props.status === "confirmed") {
-      return "green";
+    if (props.status === 'confirmed') {
+      return 'green';
     }
-    return "red";
+    return 'red';
   }};
 `;
 
@@ -51,7 +51,7 @@ const StyledStack = styled.div`
   }
 `;
 
-const UserLine = ({ name, status = "confirmed" }) => {
+const UserLine = ({ name, status = 'confirmed' }) => {
   return (
     <StyledStack>
       <StyledAvatar>{name.slice(0, 1)}</StyledAvatar>

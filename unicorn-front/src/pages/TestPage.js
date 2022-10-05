@@ -1,15 +1,9 @@
-import Footer from "../components/Footer";
-import React from "react";
-import HeaderBar from "../components/HeaderBar";
-import Terms from "../components/Terms";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
-import CssBaseline from "@mui/material/CssBaseline";
-import SearchBar from "../components/search/SearchBar";
-import Toolbar from "@mui/material/Toolbar";
-import SignUp from "../components/SignUp";
-import Container from "@mui/material/Container";
-import Picker from "../components/search/Picker";
-import HeaderWrapped from "./HeaderWrapped";
+import Footer from '../components/Footer';
+import React from 'react';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import SearchBar from '../components/search/SearchBar';
+import HeaderWrapped from './HeaderWrapped';
+import FileUpload from '../components/fileUpload/FileUpload';
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -33,8 +27,10 @@ function TestPage(props) {
       {/*<ElevationScroll {...props}>*/}
       {/*  <HeaderBar />*/}
       {/*</ElevationScroll>*/}
+
       <HeaderWrapped {...props} />
       <SearchBar />
+      <FileUpload setUploadUrl={() => {}} />
       <Footer />
     </div>
   );

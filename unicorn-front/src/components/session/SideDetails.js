@@ -1,9 +1,9 @@
-import Player from "../icons/Player";
-import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import { Button } from "@mui/material";
-import InvitePlayers from "../modal/InvitePlayers";
-
+import Player from '../icons/Player';
+import React, { useEffect, useState } from 'react';
+import styled from '@emotion/styled';
+import { Button } from '@mui/material';
+import InvitePlayers from '../modal/InvitePlayers';
+import { useTranslation } from 'react-i18next';
 const StyledParticipantButton = styled(Button)`
   padding-right: 3px;
   max-height: 40px;
@@ -66,14 +66,14 @@ const StyledFiledValue = styled.h5`
 `;
 
 const fetchUsers = () => {
-  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080"
+  let backEndUrl = process.env.REACT_APP_backEndUrl || 'http://localhost:8080';
   return fetch(`${backEndUrl}/users/all`, {
-    method: "GET",
+    method: 'GET',
   })
     .then((res) => {
       if (!res.ok) {
         throw new Error(
-          "Sorry! We are not able to create a session for you at the moment. Try again later"
+          'Sorry! We are not able to create a session for you at the moment. Try again later'
         );
       }
       return res.json();
@@ -87,13 +87,13 @@ const fetchUsers = () => {
 const SideDetails = ({ date, location, sessionId }) => {
   const [open, setOpen] = useState(false);
   const [users, setUsers] = useState([]);
-  const [backEndUrl, setBackEndUrl] = useState("http://localhost:8080");
+  const { t } = useTranslation('main');
   useEffect(async () => {
     try {
       let allUsers = await fetchUsers();
       setUsers(allUsers);
     } catch (error) {
-      console.error("Issue with fetching users ", error);
+      console.error('Issue with fetching users ', error);
     }
   }, []);
 
@@ -103,22 +103,22 @@ const SideDetails = ({ date, location, sessionId }) => {
   return (
     <StyledSideDetails>
       <ComposedField>
-        <ComposedTitle>Date and Time</ComposedTitle>
+        <ComposedTitle>{t('session.dateAndTime')}</ComposedTitle>
         <StyledFiledValue>{date}</StyledFiledValue>
       </ComposedField>
       <ComposedField>
-        <ComposedTitle>Location</ComposedTitle>
+        <ComposedTitle>{t('session.location')}</ComposedTitle>
         <StyledFiledValue>{location}</StyledFiledValue>
       </ComposedField>
       <ComposedField>
-        <ComposedTitle> Add Participants! </ComposedTitle>
+        <ComposedTitle>{t('session.add')}</ComposedTitle>
         <StyledParticipantButton
           size="small"
           variant="contained"
           endIcon={<Player />}
           onClick={handleOpen}
         >
-          Invite Players
+          {t('session.invite')}
         </StyledParticipantButton>
         <InvitePlayers
           open={open}

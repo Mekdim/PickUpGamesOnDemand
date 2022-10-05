@@ -1,20 +1,18 @@
-.signIn{
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height:100vh;
-    width:100vw;
-    background-color: #f7f7f7;
+.signIn {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f7f7f7;
 }
-.signIn__paper{
-    width: 35vw;
-    padding: "20px";
-    margin: "10px auto"
-
+.signIn__paper {
+  width: 35vw;
+  padding: '20px';
+  margin: '10px auto';
 }
-@media (max-width: 800px) { 
-    .signIn__paper{
-        width: 80vw;
-
-   }
+@media (max-width: 800px) {
+  .signIn__paper {
+    width: 80vw;
+  }
 }

@@ -1,14 +1,14 @@
-import "../css/App.css";
-import React, { Suspense, lazy } from "react";
-import Skeleton from "@mui/material/Skeleton";
+import '../css/App.css';
+import React, { Suspense, lazy } from 'react';
+import Skeleton from '@mui/material/Skeleton';
 const HeaderWrapped = lazy(() =>
-  import(/* webpackPrefetch: true */ "./HeaderWrapped")
+  import(/* webpackPrefetch: true */ './HeaderWrapped')
 );
 const HomeContent = lazy(() =>
-  import(/* webpackPrefetch: true */ "../components/HomeContent")
+  import(/* webpackPrefetch: true */ '../components/HomeContent')
 );
 const Footer = lazy(() =>
-  import(/*  webpackPrefetch: true */ "../components/Footer")
+  import(/*  webpackPrefetch: true */ '../components/Footer')
 );
 
 function Home() {

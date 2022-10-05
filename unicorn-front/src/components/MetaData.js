@@ -1,6 +1,7 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { Divider, Typography } from "@mui/material";
+import React from 'react';
+import styled from '@emotion/styled';
+import { Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const StyledField = styled.div`
   background-color: #ffffff;
@@ -13,9 +14,10 @@ const StyledField = styled.div`
 `;
 
 const Metadata = ({ fieldName, fieldValue }) => {
+  const { t } = useTranslation('main');
   return (
     <StyledField>
-      <Typography>{fieldName}</Typography>
+      <Typography>{t(`pitchCard.${fieldName}`)}</Typography>
       <Typography> {fieldValue}</Typography>
     </StyledField>
   );

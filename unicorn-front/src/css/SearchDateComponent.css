@@ -1,131 +1,118 @@
-.searchComponents{
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
+.searchComponents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.search{
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    margin:0px;
-    /*border: 1px solid lightgray;*/
-    border-radius: 999px;
-    height:5rem;
-    padding:10px;
-    background-color: darkcyan;
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  /*border: 1px solid lightgray;*/
+  border-radius: 999px;
+  height: 5rem;
+  padding: 10px;
+  background-color: darkcyan;
 }
-.search__location{
-    display:flex;
-    align-items:center;
-    max-width:fit-content;  
-    padding:20px;
-    background-color: white;
-    border: 1px solid lightgray;
-    border-top-left-radius: 999px;
-    border-bottom-left-radius: 999px;
-    height:1rem;
+.search__location {
+  display: flex;
+  align-items: center;
+  max-width: fit-content;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+  height: 1rem;
 }
 
+.search__dateRange {
+  padding: 20px;
+  display: flex;
+  max-width: fit-content;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid lightgray;
 
-
-.search__dateRange{
-    padding:20px;
-    display:flex;
-    max-width:fit-content; 
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    border: 1px solid lightgray;
-    
-    border-top-right-radius: 999px;
-    border-bottom-right-radius: 999px;
-    /*width: 15vw;*/
-    height:1rem;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+  /*width: 15vw;*/
+  height: 1rem;
 }
-.searchComponents > button{
-    background-color: grey;
-    color: white;
-    padding:15px;
-    border-radius: 999px;
-    width:15vw;
+.searchComponents > button {
+  background-color: grey;
+  color: white;
+  padding: 15px;
+  border-radius: 999px;
+  width: 15vw;
 }
-.searchComponents > button:hover  {
-    background-color: blue;
-   
+.searchComponents > button:hover {
+  background-color: blue;
 }
-.search__dateRange__textField{
-    width:20vw;
-   
+.search__dateRange__textField {
+  width: 20vw;
 }
-.search__location__textField{
-    width:20vw;
+.search__location__textField {
+  width: 20vw;
 }
 @media (max-width: 800px) {
-    .searchComponents {
-      flex-direction: column;
-      align-items: flex-start;
-      display: flex;
-      margin-left: 10px;
-      
-    }
-    .searchComponents > button{
-        background-color: grey;
-        color: white;
-        padding:10px;
-        border-radius: 999px;
-        margin-left: 15px;
-        width:75vw;
-        margin-bottom: 20px;
-        
-    }
-    .search{
-        
-        margin-bottom: 10px;
-        flex-direction: column;
-        align-items: flex-start;
-        display: flex;
-        margin-left: 10px;
-        width:80vw;
-        height:auto;
-    }
-    .search__location{
-        
-        display:flex;
-        align-items:center;
-        width:80%;
-        max-width: 80%;
-        padding:20px;
-        background-color: white;
-        border: 1px solid lightgray;
-        border-radius: 999px;
-        border-radius: 999px;
-        height:1rem;
-    }
-    
-    
-    
-    .search__dateRange{
-        margin-top:10px;
-        padding:2px;
-        display:flex;
-        width:90%;
-        max-width: 100%;
-        align-items: center;
-        justify-content: flex-start;
-        background-color: white;
-        border: 1px solid lightgray;
-        border-radius: 999px;
-        /*width: 15vw;*/
-        height:3rem;
-    }
-    .search__dateRange__textField{
-        width:65vw;
-        left:10px;
-    }
-    .search__location__textField{
-        width:80vw;
-    }
-    
+  .searchComponents {
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    margin-left: 10px;
+  }
+  .searchComponents > button {
+    background-color: grey;
+    color: white;
+    padding: 10px;
+    border-radius: 999px;
+    margin-left: 15px;
+    width: 75vw;
+    margin-bottom: 20px;
+  }
+  .search {
+    margin-bottom: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+    margin-left: 10px;
+    width: 80vw;
+    height: auto;
+  }
+  .search__location {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    max-width: 80%;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 999px;
+    border-radius: 999px;
+    height: 1rem;
+  }
+
+  .search__dateRange {
+    margin-top: 10px;
+    padding: 2px;
+    display: flex;
+    width: 90%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 999px;
+    /*width: 15vw;*/
+    height: 3rem;
+  }
+  .search__dateRange__textField {
+    width: 65vw;
+    left: 10px;
+  }
+  .search__location__textField {
+    width: 80vw;
+  }
 }
-
-

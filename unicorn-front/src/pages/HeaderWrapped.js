@@ -1,6 +1,6 @@
-import React from "react";
-import HeaderBar from "../components/HeaderBar";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
+import React from 'react';
+import HeaderBar from '../components/HeaderBar';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 function ElevationScroll(props) {
   const { children, window } = props;

@@ -1,7 +1,7 @@
-import React from "react";
-import ContactUs from "../components/ContactUs";
-import Footer from "../components/Footer.js";
-import HeaderWrapped from "./HeaderWrapped";
+import React from 'react';
+import ContactUs from '../components/ContactUs';
+import Footer from '../components/Footer.js';
+import HeaderWrapped from './HeaderWrapped';
 
 function ContactUsPage({ className }) {
   return (

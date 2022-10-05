@@ -1,0 +1,64 @@
+{
+  "welcome": {
+    "title": "Bleiben Sie aktiv und gesund",
+    "subTitle": "Bist du bereit, das schöne Spiel zu spielen?",
+    "featured": "Ausgewählte Spielplätze",
+    "gallery": "Fotogalerien"
+  },
+  "searchBar": {
+    "locationPlaceHolder": "Wo ?",
+    "locationLabel": "Ort",
+    "date": "Datum",
+    "time": "Wann ?",
+    "searchButton": "Suche"
+  },
+  "footer": {
+    "title": "Uber uns",
+    "aboutUs": "uber uns",
+    "contactUs": "Kontaktiere uns",
+    "howItWorks": "Wie es funktioniert",
+    "host": "Host-Spiele",
+    "terms": "Bedingungen",
+    "privacy": "Privatsphäre"
+  },
+  "pitchCard": {
+    "capacity": "Kapazität",
+    "price": "Pries"
+  },
+  "calendar": {
+    "Mon": "Mon",
+    "Tue": "Din",
+    "Wed": "Mit",
+    "Thu": "Don",
+    "Fri": "Fri",
+    "Sat": "Sam",
+    "Sun": "Son"
+  },
+  "addModal": {
+    "title": "Erstellen Sie eine Sitzung",
+    "name": "Sitzungsname",
+    "placeHolder": "z.B.  Morgentliche Sitzung",
+    "date": "Datum",
+    "startTime": "StartZeit",
+    "endTime": "EndZeit",
+    "create": "Erstellen!",
+    "creating": "Erstellung..."
+  },
+  "session": {
+    "join": "Join!",
+    "joining": "Joining...",
+    "time": "Zeit : ",
+    "price": "Preis : ",
+    "participants": "Teilnehmer : ",
+    "dateAndTime": "Datum und Zeit",
+    "location": "Standort",
+    "add": "Teilnehmer hinzufügen!",
+    "invite": "Spieler einladen",
+    "post": "Posten Sie hier Ihre Nachrichten",
+    "send": "Schicken",
+    "playerList": "Spielerliste",
+    "confirmed": "Bestätigt",
+    "invited": "Eingeladen",
+    "leave": "Sitzung verlassen"
+  }
+}

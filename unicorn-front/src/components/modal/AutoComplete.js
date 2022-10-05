@@ -1,49 +1,49 @@
-import * as React from "react";
-import { useAutocomplete } from "@mui/core/AutocompleteUnstyled";
-import CheckIcon from "@mui/icons-material/Check";
-import { styled } from "@mui/material/styles";
-import Chip from "@mui/material/Chip";
-import Soccer from "../icons/Soccer";
-import UserLine from "../session/UserLine";
-import Checkbox from "@mui/material/Checkbox";
-import { useEffect } from "react";
+import * as React from 'react';
+import { useAutocomplete } from '@mui/core/AutocompleteUnstyled';
+import CheckIcon from '@mui/icons-material/Check';
+import { styled } from '@mui/material/styles';
+import Chip from '@mui/material/Chip';
+import Soccer from '../icons/Soccer';
+import UserLine from '../session/UserLine';
+import Checkbox from '@mui/material/Checkbox';
+import { useEffect } from 'react';
 
-const Root = styled("div")(
+const Root = styled('div')(
   ({ theme }) => `
   color: ${
-    theme.palette.mode === "dark" ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,.85)"
+    theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'
   };
   font-size: 14px;
 `
 );
 
-const InputWrapper = styled("div")(
+const InputWrapper = styled('div')(
   ({ theme }) => `
   width: 350px;
   min-height: 40px;
   text-align: left;
-  border: 1px solid ${theme.palette.mode === "dark" ? "#434343" : "#d9d9d9"};
-  background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
+  border: 1px solid ${theme.palette.mode === 'dark' ? '#434343' : '#d9d9d9'};
+  background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
   border-radius: 4px;
   padding: 1px;
   display: flex;
   flex-wrap: wrap;
 
   &:hover {
-    border-color: ${theme.palette.mode === "dark" ? "#177ddc" : "#40a9ff"};
+    border-color: ${theme.palette.mode === 'dark' ? '#177ddc' : '#40a9ff'};
   }
 
   &.focused {
-    border-color: ${theme.palette.mode === "dark" ? "#177ddc" : "#40a9ff"};
+    border-color: ${theme.palette.mode === 'dark' ? '#177ddc' : '#40a9ff'};
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
   }
 
   & input {
-    background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
+    background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
     color: ${
-      theme.palette.mode === "dark"
-        ? "rgba(255,255,255,0.65)"
-        : "rgba(0,0,0,.85)"
+      theme.palette.mode === 'dark'
+        ? 'rgba(255,255,255,0.65)'
+        : 'rgba(0,0,0,.85)'
     };
     height: 40px;
     box-sizing: border-box;
@@ -68,8 +68,8 @@ function Tag(props) {
   const { label, onDelete, ...other } = props;
   return (
     <StyledChip
-      variant={"outlined"}
-      color={"success"}
+      variant={'outlined'}
+      color={'success'}
       icon={<Soccer />}
       label={label}
       onDelete={onDelete}
@@ -77,14 +77,14 @@ function Tag(props) {
   );
 }
 
-const Listbox = styled("ul")(
+const Listbox = styled('ul')(
   ({ theme }) => `
   width: 90%;
   margin: 2px 0 0;
   padding: 0;
   position: absolute;
   list-style: none;
-  background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
+  background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
   overflow: auto;
   max-height: 250px;
   border-radius: 4px;
@@ -104,7 +104,7 @@ const Listbox = styled("ul")(
   }
 
   & li[aria-selected='true'] {
-    background-color: ${theme.palette.mode === "dark" ? "#2b2b2b" : "#fafafa"};
+    background-color: ${theme.palette.mode === 'dark' ? '#2b2b2b' : '#fafafa'};
     font-weight: 600;
 
     & svg {
@@ -113,7 +113,7 @@ const Listbox = styled("ul")(
   }
 
   & li[data-focus='true'] {
-    background-color: ${theme.palette.mode === "dark" ? "#003b57" : "#e6f7ff"};
+    background-color: ${theme.palette.mode === 'dark' ? '#003b57' : '#e6f7ff'};
     cursor: pointer;
 
     & svg {
@@ -123,7 +123,7 @@ const Listbox = styled("ul")(
 `
 );
 
-const StyledLi = styled("li")`
+const StyledLi = styled('li')`
   border-bottom: 1px solid #b1b1b1;
   width: 100%;
   cursor: pointer;
@@ -132,7 +132,7 @@ const StyledLi = styled("li")`
   }
 `;
 
-const StyledCheckIcon = styled("div")`
+const StyledCheckIcon = styled('div')`
   margin-top: auto;
   margin-bottom: auto;
   text-align: center;
@@ -152,7 +152,7 @@ export default function AutoComplete({ players, setPlayers }) {
     focused,
     setAnchorEl,
   } = useAutocomplete({
-    id: "auto-complete",
+    id: 'auto-complete',
     multiple: true,
     freeSolo: true,
     limitTags: 4,
@@ -167,14 +167,17 @@ export default function AutoComplete({ players, setPlayers }) {
   return (
     <Root>
       <div {...getRootProps()}>
-        <InputWrapper ref={setAnchorEl} className={focused ? "focused" : ""}>
+        <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
           {value.map((option, index) => (
             <Tag
               label={option.first_name ? option.first_name : option}
               {...getTagProps({ index })}
             />
           ))}
-          <input placeholder="Invite friends!" {...getInputProps()} />
+          <input
+            placeholder="Search friends or Type their Email!"
+            {...getInputProps()}
+          />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (

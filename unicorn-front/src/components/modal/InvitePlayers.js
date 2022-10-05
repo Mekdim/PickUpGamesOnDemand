@@ -1,19 +1,17 @@
-import React, { useMemo, useState } from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import styled from "@emotion/styled";
-import DialogContent from "@mui/material/DialogContent";
-import PlayerLine from "../session/PlayerLine";
-import { Box, Button, Divider } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@mui/material/IconButton";
-import AutoComplete from "./AutoComplete";
-import DialogActions from "@mui/material/DialogActions";
-import SportsIcon from "@mui/icons-material/Sports";
-import CircularProgress from "@mui/material/CircularProgress";
-import Player from "../icons/Player";
-import Cookies from "js-cookie";
-import { refreshTheToken } from "../logic/logic";
+import React, { useState } from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import styled from '@emotion/styled';
+import DialogContent from '@mui/material/DialogContent';
+import { Box, Button } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import AutoComplete from './AutoComplete';
+import DialogActions from '@mui/material/DialogActions';
+import CircularProgress from '@mui/material/CircularProgress';
+import Player from '../icons/Player';
+import Cookies from 'js-cookie';
+import { refreshTheToken } from '../logic/logic';
 
 const StyledParticipantButton = styled(Button)`
   padding-right: 3px;
@@ -44,18 +42,17 @@ const StyledParticipantButton = styled(Button)`
 `;
 const StyledTitle = styled.p`
   //font-family: "Nova Mono", monospace;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   width: 100%;
 `;
 
 const StyledDialog = styled(Dialog)`
   .MuiPaper-root {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     min-height: 450px;
     border-radius: 15px;
-    padding: 20px;
-    padding-top: 0;
+    padding: 0 20px 20px;
   }
 
   @media screen and (max-width: 759px) {
@@ -79,40 +76,51 @@ const StyledDialogTitle = styled(DialogTitle)`
   padding: 6px 6px 0 0;
 `;
 
-const handleInvite = ({ selected, handleClose, sessionId }, refreshEnabled=true) => {
-  let bearer_token = Cookies.get('accessToken')
-       if (!bearer_token){
-          alert(" we couldnt get your stored sessionin  data . Please try logging in again ")
-       } 
-  let backEndUrl = process.env.REACT_APP_backEndUrl  || "http://localhost:8080"
+const handleInvite = (
+  { selected, handleClose, sessionId },
+  refreshEnabled = true
+) => {
+  let bearer_token = Cookies.get('accessToken');
+  if (!bearer_token) {
+    alert(
+      ' we couldnt get your stored sessionin  data . Please try logging in again '
+    );
+  }
+  let backEndUrl = process.env.REACT_APP_backEndUrl || 'http://localhost:8080';
   return fetch(`${backEndUrl}/users/invite/${sessionId}`, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(selected),
     headers: {
-      "Content-Type": "application/json",
-      "Authorization":  'Bearer ' + bearer_token
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + bearer_token,
     },
   })
     .then(async (res) => {
-      if (res.status == 403 && refreshEnabled) {
-         
+      if (res.status === 403 && refreshEnabled) {
         //  return "Token expired error"
-        let tokens = await refreshTheToken()
-          if (!tokens){
-            console.log("We couldnt get new tokens and refresh token for you. We are not able to invite players for you.")
-            
-            return
-            //alert("We couldnt get new tokens and refresh token for you. Sorry")
-          }
-          Cookies.set('accessToken', tokens.accessToken)
-          Cookies.set('refreshToken', tokens.refreshToken)
-          // try one more time with refreshing token disabled this time
-          handleInvite({selected:selected, handleClose:handleClose, sessionId:sessionId},false)
-          return
+        let tokens = await refreshTheToken();
+        if (!tokens) {
+          console.log(
+            'We couldnt get new tokens and refresh token for you. We are not able to invite players for you.'
+          );
 
+          return;
+        }
+        Cookies.set('accessToken', tokens.accessToken);
+        Cookies.set('refreshToken', tokens.refreshToken);
+        // try one more time with refreshing token disabled this time
+        handleInvite(
+          {
+            selected: selected,
+            handleClose: handleClose,
+            sessionId: sessionId,
+          },
+          false
+        );
+        return;
       }
       if (!res.ok) {
-        throw new Error("Sorry! Invitations not sent");
+        throw new Error('Sorry! Invitations not sent');
       }
       return res.json();
     })
@@ -125,15 +133,15 @@ const handleInvite = ({ selected, handleClose, sessionId }, refreshEnabled=true)
 const ParticipantsModal = ({ open, handleClose, players, sessionId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [value, setValue] = useState([]);
-  const [backEndUrl, setBackEndUrl] = React.useState(process.env.REACT_APP_backEndUrl || "http://localhost:8080");
+
   return (
     <StyledDialog onClose={handleClose} open={open}>
       <StyledDialogTitle>
         <ModalTitle>
-          <StyledTitle> Invite your friends </StyledTitle>
+          <StyledTitle> Invite your friends or Email them </StyledTitle>
           <CloseButton>
-            <IconButton onClick={handleClose} aria-label="close" size="middle">
-              <CloseIcon fontSize={"middle"} />
+            <IconButton onClick={handleClose} aria-label="close" size="medium">
+              <CloseIcon fontSize={'medium'} />
             </IconButton>
           </CloseButton>
         </ModalTitle>
@@ -142,7 +150,7 @@ const ParticipantsModal = ({ open, handleClose, players, sessionId }) => {
         <AutoComplete players={players} setPlayers={setValue} />
       </DialogContent>
       <DialogActions>
-        <Box sx={{ m: 1, position: "relative" }}>
+        <Box sx={{ m: 1, position: 'relative' }}>
           <StyledParticipantButton
             size="small"
             variant="contained"
@@ -157,12 +165,12 @@ const ParticipantsModal = ({ open, handleClose, players, sessionId }) => {
             <CircularProgress
               size={24}
               sx={{
-                color: "green",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-12px",
-                marginLeft: "-12px",
+                color: 'green',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px',
               }}
             />
           )}

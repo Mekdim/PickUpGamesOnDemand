@@ -1,19 +1,18 @@
-import React, { useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import DateAdapter from "@mui/lab/AdapterMoment";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import momentTimezone from "moment-timezone";
-import { useHistory } from "react-router-dom";
-import { useStateValue } from "../../StateProvider";
-import useTheme from "@mui/material/styles/useTheme";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { MobileDatePicker } from "@mui/lab";
-import makeStyles from "@mui/styles/makeStyles";
-import createStyles from "@mui/styles/createStyles";
-import Picker from "./Picker";
-import { getPitches } from "./SearchBarLogic";
-import Loader from "../Loader";
-import PitchLine from "./PitchLine";
+import React, { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import DateAdapter from '@mui/lab/AdapterMoment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { useHistory } from 'react-router-dom';
+import { useStateValue } from '../../StateProvider';
+import useTheme from '@mui/material/styles/useTheme';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { MobileDatePicker } from '@mui/lab';
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import Picker from './Picker';
+import { getPitches } from './SearchBarLogic';
+import Loader from '../Loader';
+import PitchLine from './PitchLine';
 import {
   StyledPopper,
   Box,
@@ -27,33 +26,34 @@ import {
   SearchLabelStyled,
   StyledAutocomplete,
   StyledDividerVertical,
-} from "./SearchBarStyles";
-import usePitches from "./hooks/usePitches";
+} from './SearchBarStyles';
+import usePitches from './hooks/usePitches';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      "& .MuiAutocomplete-listbox": {
-        "& li": {
-          borderRadius: "15px",
+      '& .MuiAutocomplete-listbox': {
+        '& li': {
+          borderRadius: '15px',
         },
-        "& li:hover, li:focus": {
-          borderRadius: "15px",
-          backgroundColor: "#ebf8f8",
+        '& li:hover, li:focus': {
+          borderRadius: '15px',
+          backgroundColor: '#ebf8f8',
         },
       },
 
-      "& .MuiAutocomplete-paper": {
-        minHeight: "320px",
-        maxHeight: "320px",
-        border: "1px solid #c7c7c7",
-        "border-radius": "20px",
-        "margin-top": "20px",
-        padding: "16px 24px 16px 24px",
+      '& .MuiAutocomplete-paper': {
+        minHeight: '320px',
+        maxHeight: '320px',
+        border: '1px solid #c7c7c7',
+        'border-radius': '20px',
+        'margin-top': '20px',
+        padding: '16px 24px 16px 24px',
         boxShadow:
-          "0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)",
+          '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)',
         transition:
-          "opacity 326ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 217ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          'opacity 326ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 217ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
       },
     },
   })
@@ -71,10 +71,11 @@ const PopperMy = function (props) {
 };
 
 const SearchBar = () => {
-  const { moment } = new DateAdapter({ instance: momentTimezone });
+  const { moment } = new DateAdapter();
+  const { t } = useTranslation('main');
   const theme = useTheme();
-  const small = useMediaQuery(theme.breakpoints.down("sm"));
-  const smallDevice = useMediaQuery("(max-width: 759px)");
+  const small = useMediaQuery(theme.breakpoints.down('sm'));
+  const smallDevice = useMediaQuery('(max-width: 759px)');
 
   const history = useHistory();
   const [{ selectedDate, pitchSearched }, dispatch] = useStateValue();
@@ -94,7 +95,7 @@ const SearchBar = () => {
         name: pitches[i].name,
         type: pitches[i].type,
         address: pitches[i].address,
-        label: pitches[i].description + " in " + pitches[i].address + " ",
+        label: pitches[i].description,
         id: pitches[i].id,
       });
     }
@@ -105,7 +106,7 @@ const SearchBar = () => {
     <Box>
       <SearchRow>
         <SearchField>
-          <SearchLabelStyled>Location</SearchLabelStyled>
+          <SearchLabelStyled>{t('searchBar.locationLabel')}</SearchLabelStyled>
           <StyledAutocomplete
             isOptionEqualToValue={(option, value) => option.id === value.id}
             PopperComponent={PopperMy}
@@ -123,36 +124,35 @@ const SearchBar = () => {
             renderInput={(params) => (
               <SearchInput
                 variant="standard"
-                placeholder="Where ?"
+                placeholder={t('searchBar.locationPlaceHolder')}
                 {...params}
               />
             )}
           />
         </SearchField>
         <StyledDividerVertical
-          orientation={"vertical"}
-          variant={"middle"}
+          orientation={'vertical'}
+          variant={'middle'}
           flexItem
         />
-        <StyledDividerHorizontal variant={"middle"} flexItem />
+        <StyledDividerHorizontal variant={'middle'} flexItem />
         {!small && <Picker date={date} setDate={setDate} />}
         {small && (
           <SearchField>
-            <SearchLabelStyled>Date</SearchLabelStyled>
+            <SearchLabelStyled>{t('searchBar.date')}</SearchLabelStyled>
             <LocalizationProvider dateAdapter={DateAdapter}>
               {small && (
                 <MobileDatePicker
-                  minDate={moment(new Date().getDate(), "DD/MM/YYYY")}
+                  minDate={moment(new Date().getDate(), 'DD/MM/YYYY')}
                   value={date}
                   onChange={(value) => {
                     setDate(value);
                   }}
                   renderInput={(params) => {
-                    params.inputProps.placeholder = "when ?";
                     return (
                       <SearchInput
                         variant="standard"
-                        placeholder={"When ?"}
+                        placeholder={t('searchBar.time')}
                         {...params}
                       />
                     );
@@ -162,11 +162,11 @@ const SearchBar = () => {
             </LocalizationProvider>
           </SearchField>
         )}
-        <StyledDividerHorizontal variant={"middle"} flexItem />
+        <StyledDividerHorizontal variant={'middle'} flexItem />
         <ButtonBar>
           {smallDevice && (
             <SearchButton
-              startIcon={<SearchIcon fontSize={"large"} />}
+              startIcon={<SearchIcon fontSize={'large'} />}
               onClick={() =>
                 getPitches({
                   date,
@@ -177,7 +177,7 @@ const SearchBar = () => {
                 })
               }
             >
-              Search
+              {t('searchBar.searchButton')}
             </SearchButton>
           )}
           {!smallDevice && (
@@ -194,7 +194,7 @@ const SearchBar = () => {
                 })
               }
             >
-              <SearchIcon fontSize={"large"} />
+              <SearchIcon fontSize={'large'} />
             </SearchIconButton>
           )}
         </ButtonBar>

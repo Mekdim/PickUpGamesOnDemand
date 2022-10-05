@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
-import TextField from "@mui/material/TextField";
-import { Autocomplete, Divider, IconButton } from "@mui/material";
-import Button from "@mui/material/Button";
-import Popper from "@mui/material/Popper";
+import styled from '@emotion/styled';
+import TextField from '@mui/material/TextField';
+import { Autocomplete, Divider, IconButton } from '@mui/material';
+import Button from '@mui/material/Button';
+import Popper from '@mui/material/Popper';
 
 export const SearchLabelStyled = styled.p`
   text-align: left;
@@ -16,7 +16,6 @@ export const SearchLabelStyled = styled.p`
 
 export const SearchInput = styled(TextField)`
   margin-left: 20px;
-  //width: 100%;
 
   .MuiInput-root:before {
     border-bottom: none;
@@ -37,11 +36,6 @@ export const SearchInput = styled(TextField)`
     margin-right: 20px;
     background-color: #ff8585;
   }
-
-  //.MuiInputAdornment-root,
-  //.MuiAutocomplete-endAdornment {
-  //  display: none;
-  //}
 
   .MuiAutocomplete-popper {
     border-radius: 20px !important;
@@ -195,13 +189,6 @@ export const ButtonBar = styled.div`
 export const Box = styled.div`
   background-color: white;
   border-radius: 40px;
-  //border: 2px solid black;
-  //width: 100%;
-
-  //@media screen and (max-width: 759px) {
-  //  padding: 16px 8px;
-  //  //width: 100%;
-  //}
 `;
 
 export const StyledPopper = styled(Popper)`

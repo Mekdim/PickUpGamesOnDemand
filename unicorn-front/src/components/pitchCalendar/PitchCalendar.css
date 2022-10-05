@@ -1,0 +1,86 @@
+/*Remove the line for the half hour separator*/
+.fc .fc-timegrid-slot-minor {
+  border-top-style: none;
+}
+.fc .fc-timegrid-slot {
+  height: 20px;
+}
+
+.fc .fc-day-today {
+  background: rgb(186 245 245 / 24%) !important;
+}
+
+.fc-media-screen .fc-timegrid-now-indicator-container {
+  position: unset;
+}
+
+.fc .fc-timegrid-now-indicator-line {
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+  border-color: red;
+  background-color: red;
+}
+
+/* Day view*/
+.fc-timeGridDay-view .fc-timegrid-now-indicator-arrow {
+  display: none;
+}
+
+.fc-timeGridDay-view .fc-timegrid-now-indicator-line::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+/*Week view*/
+.fc-timeGridWeek-view .fc-timegrid-now-indicator-arrow {
+  display: none;
+}
+
+.fc-timeGridWeek-view .fc-timegrid-now-indicator-line::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.fc-timegrid-event .fc-event-main {
+  padding: 0;
+}
+
+.fc-v-event {
+  border: 1px solid #c7c7c7;
+  border-left: none;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 2px;
+}
+
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events {
+  margin-bottom: 0;
+}
+
+/*For the Time Gutter - the Divider needs it*/
+.fc .fc-timegrid-slot-label-cushion {
+  display: block !important;
+}
+
+.fc .fc-timegrid-axis-cushion,
+.fc .fc-timegrid-slot-label-cushion {
+  padding: 0 !important;
+}
+
+.fc .fc-timegrid-slot-label {
+  border: none;
+  vertical-align: baseline;
+}

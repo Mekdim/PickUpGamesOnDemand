@@ -1,22 +1,22 @@
-const { merge } = require("webpack-merge");
-const common = require("./webpack.common.js");
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
-  mode: "development",
+  mode: 'development',
   devServer: {
-    static: "build",
+    static: 'build',
     port: 3000,
     historyApiFallback: true,
     devMiddleware: {
       writeToDisk: true,
     },
   },
-  devtool: "eval",
+  devtool: 'eval',
   module: {
     rules: [
       {
         test: /\.(s*)css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

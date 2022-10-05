@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import styled from "@emotion/styled";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import InvitationSvg from "../../images/Invitation.svg";
-import Link from "@mui/material/Link";
-import { clearNotification } from "../logic/logic";
-import { useStateValue } from "../../StateProvider";
-import { actionTypes } from "../../reducer";
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import InvitationSvg from '../../images/Invitation.svg';
+import Link from '@mui/material/Link';
+import { clearNotification } from '../logic/logic';
+import { useStateValue } from '../../StateProvider';
+import { actionTypes } from '../../reducer';
 
 const StyledName = styled.h4`
   text-align: left;
@@ -56,11 +56,11 @@ const CloseButton = styled.span`
   text-align: right;
   margin-top: auto;
   position: relative;
-  bottom: 54px;
-  right: -13px;
+  bottom: 57px;
+  right: 3px;
   z-index: 4;
   display: ${(props) => {
-    return props.show ? props.show : "none";
+    return props.show ? props.show : 'none';
   }};
 `;
 
@@ -70,8 +70,6 @@ const CloseIonStyled = styled(CloseIcon)`
 
 const CloseIonStyledIconButton = styled(IconButton)`
   background-color: #ff8585;
-  width: 20px;
-  height: 20px;
   transition: border 280ms cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-box-shadow: 0px 1px 2px 0px rgb(60 64 67 / 30%),
@@ -96,10 +94,10 @@ const NotificationLine = ({
   notificationId,
   copiedNotification,
 }) => {
-  const [display, setDisplay] = useState("none");
+  const [display, setDisplay] = useState('none');
   const [state, dispatch] = useStateValue();
   let notify = JSON.parse(JSON.stringify(copiedNotification));
-  console.log("Notification id ", sessionId);
+  console.log('Notification id ', sessionId);
 
   const handleDismiss = async () => {
     try {
@@ -112,7 +110,7 @@ const NotificationLine = ({
         userNotifications: updated,
       });
     } catch (error) {
-      console.log("Error clearing notification ", error);
+      console.log('Error clearing notification ', error);
     }
   };
 
@@ -120,16 +118,16 @@ const NotificationLine = ({
     <>
       <StyledStack
         onMouseEnter={(e) => {
-          setDisplay("inline-block");
+          setDisplay('inline-block');
         }}
         onMouseLeave={(e) => {
-          setDisplay("none");
+          setDisplay('none');
         }}
       >
         <StyledAvatar>
           <InvitationSvg />
         </StyledAvatar>
-        <StyledName> {"You have been invited! "}</StyledName>
+        <StyledName> {'You have been invited! '}</StyledName>
         <StyledStatus>
           <Link href={`/sessions/${sessionId}`}> Session </Link>
         </StyledStatus>
@@ -139,7 +137,7 @@ const NotificationLine = ({
             aria-label="close"
             size="small"
           >
-            <CloseIonStyled fontSize={"middle"} />
+            <CloseIonStyled fontSize={'small'} />
           </CloseIonStyledIconButton>
         </CloseButton>
       </StyledStack>

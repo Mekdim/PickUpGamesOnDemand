@@ -1,8 +1,8 @@
-import "../css/App.css";
-import React from "react";
-import SearchResult from "../components/SearchResults";
-import Footer from "../components/Footer.js";
-import HeaderWrapped from "./HeaderWrapped";
+import '../css/App.css';
+import React from 'react';
+import SearchResult from '../components/searchResult/SearchResults';
+import Footer from '../components/Footer.js';
+import HeaderWrapped from './HeaderWrapped';
 
 function SearchResults() {
   return (

@@ -1,13 +1,15 @@
-import { actionTypes } from "../../reducer";
+import { actionTypes } from '../../reducer';
+import { logErrors } from '../logic/logic';
+import Cookies from 'js-cookie';
 
 const dayofweek = {
-  1: "monday",
-  2: "tuesday",
-  3: "wednesday",
-  4: "thursday",
-  5: "friday",
-  6: "saturday",
-  7: "sunday",
+  1: 'monday',
+  2: 'tuesday',
+  3: 'wednesday',
+  4: 'thursday',
+  5: 'friday',
+  6: 'saturday',
+  7: 'sunday',
 };
 
 // search pitches based on date and location selected
@@ -19,12 +21,12 @@ export const getPitches = ({
   history,
 }) => {
   if (!date) {
-    alert("please select date to search");
+    alert('please select date to search');
     return;
   }
-  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080";
+  let backEndUrl = process.env.REACT_APP_backEndUrl || 'http://localhost:8080';
   let url = `${backEndUrl}/pitch/pitches/`;
-  const formatedDate = date.format("YYYY-MM-DD");
+  const formatedDate = date.format('YYYY-MM-DD');
   if (locationSelected) {
     url = `${url}${locationSelected.id}/`;
   }
@@ -32,9 +34,9 @@ export const getPitches = ({
   setLoading(true);
   // date.isoweekeday returns 1-7 starting from monday
   fetch(url + dayofweek[date.isoWeekday()], {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-type": "application/json",
+      'Content-type': 'application/json',
     },
     //phone number has to be inserted properly as well on sign up
   })
@@ -49,7 +51,7 @@ export const getPitches = ({
       if (result.length > 0) {
         for (let i = 0; i < result.length; i++) {
           // append this value on results so we can use it on pitch card
-          result[i]["dateSearched"] = formatedDate;
+          result[i]['dateSearched'] = formatedDate;
         }
         dispatch({
           // for now let me ignore the result here
@@ -80,20 +82,32 @@ export const getPitches = ({
           type: actionTypes.SET_PITCH_SEARCHED,
           pitchSearched: locationSelected,
         });
-        
       }
       setLoading(false);
-      history.push("/search_results");
+      history.push('/search_results');
     })
     .catch((error) => {
+      if (error.statusText) {
+        logErrors(
+          `There was an error for user ${Cookies.get(
+            'firstname'
+          )} with id ${Cookies.get('id')} : ${error.statusText}`
+        );
+      } else if (typeof error.toString() === 'string') {
+        logErrors(
+          `There was an error for user ${Cookies.get(
+            'firstname'
+          )} with id ${Cookies.get('id')} : ${error.toString()}`
+        );
+      }
       setLoading(false);
       // error can come from rejected Promise fetch api error or from backend API
       // console.log(error.status)
       alert(
-        "Sorry, Some server error happened while fetching pitches for the selected date and location!"
+        'Sorry, Some server error happened while fetching pitches for the selected date and location!'
       );
       // if error comes from backend API - we can grab the mesage here or send it to logger in the future
-      if (typeof error.json === "function") {
+      if (typeof error.json === 'function') {
         error
           .json()
           .then((error) => {

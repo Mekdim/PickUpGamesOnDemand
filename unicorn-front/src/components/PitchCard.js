@@ -1,14 +1,14 @@
-import React from "react";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
-import styled from "@emotion/styled";
-import { useHistory } from "react-router-dom";
-import "../css/Pulse.css";
+import React from 'react';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
+import styled from '@emotion/styled';
+import { useHistory } from 'react-router-dom';
+import '../css/Pulse.css';
 
 const CardActionsStyled = styled(CardActions)`
   justify-content: flex-end;
@@ -55,11 +55,11 @@ const PitchCard = ({ src, name, description, path }) => {
           height="240"
           image={src}
           alt="Pitch"
-          sx={{ "object-fit": "cover", width: "100%" }}
+          sx={{ objectFit: 'cover', width: '100%' }}
         />
         <CardContentStyled>
           <Typography
-            sx={{ color: "black" }}
+            sx={{ color: 'black' }}
             gutterBottom
             variant="h5"
             component="div"
@@ -67,7 +67,7 @@ const PitchCard = ({ src, name, description, path }) => {
             {name}
           </Typography>
           <Typography
-            sx={{ color: "secondary" }}
+            sx={{ color: 'secondary' }}
             variant="body2"
             color="text.secondary"
           >
@@ -77,7 +77,7 @@ const PitchCard = ({ src, name, description, path }) => {
       </CardActionArea>
       <CardActionsStyled>
         <StyledJoinButton
-          color={"success"}
+          color={'success'}
           variant="contained"
           onClick={() => history.push(path)}
         >

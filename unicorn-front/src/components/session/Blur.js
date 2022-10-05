@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "@emotion/styled";
-import floodLight from "../../images/floodlight.jpg";
+import React from 'react';
+import styled from '@emotion/styled';
+import floodLight from '../../images/floodlight.jpg';
 
 const StyledImage = styled.div`
   min-height: 25rem;

@@ -1,19 +1,19 @@
-import * as React from "react";
-import Popover from "@mui/material/Popover";
-import styled from "@emotion/styled";
-import Badge from "@mui/material/Badge";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import IconButton from "@mui/material/IconButton";
-import { useEffect, useMemo, useState } from "react";
-import { useStateValue } from "../../StateProvider";
-import NotificationLine from "./NotificationLine";
-import { Button } from "@mui/material";
-import { clearAllNotifications } from "../logic/logic";
-import { actionTypes } from "../../reducer";
+import * as React from 'react';
+import Popover from '@mui/material/Popover';
+import styled from '@emotion/styled';
+import Badge from '@mui/material/Badge';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import IconButton from '@mui/material/IconButton';
+import { useEffect, useState } from 'react';
+import { useStateValue } from '../../StateProvider';
+import NotificationLine from './NotificationLine';
+import { Button } from '@mui/material';
+import { clearAllNotifications } from '../logic/logic';
+import { actionTypes } from '../../reducer';
 
 const StyledPopover = styled(Popover)`
   .MuiPaper-root {
-    margin-top: 20px;
+    margin-top: 12px;
     width: 380px;
     min-width: 380px;
     max-width: 380px;
@@ -64,7 +64,7 @@ const StyledNotificationContainer = styled.div`
 const StyledEmptyState = styled.p`
   margin-top: 150px;
   text-align: center;
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
   font-size: x-large;
 `;
@@ -77,7 +77,7 @@ export default function Notifications() {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
   const [state, dispatch] = useStateValue();
   const [count, setCount] = useState(0);
 
@@ -113,18 +113,44 @@ export default function Notifications() {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 18,
+              width: 10,
+              height: 10,
+              bgcolor: '#f5f8fb',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
         }}
       >
         <StyledPopperWrapper>
           <StyledPickerClear>
             <StyledButton
-              variant={"outlined"}
+              variant={'outlined'}
               onClick={async (ev) => {
                 ev.preventDefault();
                 ev.stopPropagation();
@@ -140,7 +166,7 @@ export default function Notifications() {
                     userNotifications: [],
                   });
                 } catch (e) {
-                  console.error("Unable to clear notifications ", e);
+                  console.error('Unable to clear notifications ', e);
                 }
               }}
             >
@@ -149,7 +175,7 @@ export default function Notifications() {
           </StyledPickerClear>
           <StyledNotificationContainer>
             {clonedArray.length === 0 && (
-              <StyledEmptyState>{"👍 All caught up! 👍"}</StyledEmptyState>
+              <StyledEmptyState>{'👍 All caught up! 👍'}</StyledEmptyState>
             )}
             {clonedArray.map((notif) => {
               return (

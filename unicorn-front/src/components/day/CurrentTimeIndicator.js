@@ -1,13 +1,16 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Divider from "@mui/material/Divider";
+import React from 'react';
+import styled from '@emotion/styled';
+import Divider from '@mui/material/Divider';
 
 const StyledCurrentTimeDivider = styled(Divider)`
   border-top: 2px solid;
   z-index: 50;
   position: absolute;
   border-color: red;
-  width: 100%;
+  width: ${(props) => {
+    return props.width ? props.width : 150;
+  }}px;
+  margin-left: 0;
   top: ${(props) => {
     return props.top ? props.top : 0;
   }}px;
@@ -23,7 +26,7 @@ const StyledCircle = styled.div`
   position: absolute;
   height: 12px;
   width: 12px;
-  margin-left: 61px;
+  margin-left: -7px;
   top: ${(props) => {
     return props.top ? props.top : 0;
   }}px;
@@ -38,7 +41,7 @@ const StyledCurrentTime = styled.p`
   color: #ef3131;
   font-weight: 200;
   font-size: 11px;
-  margin-left: 3px;
+  margin-left: -62px;
   margin-block-start: 0;
   margin-block-end: 0;
   top: ${(props) => {
@@ -46,16 +49,16 @@ const StyledCurrentTime = styled.p`
   }}px;
 `;
 
-const CurrentTimeIndicator = ({ height, id }) => {
+const CurrentTimeIndicator = ({ height, id, width }) => {
   const time = new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
     hour12: false,
   });
 
   const timeAMPM = new Date().toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
     hour12: true,
   });
   let hours = Number(time.slice(0, 2)) * 60;
@@ -72,7 +75,11 @@ const CurrentTimeIndicator = ({ height, id }) => {
         {timeAMPM}
       </StyledCurrentTime>
       <StyledCircle top={topShift} />
-      <StyledCurrentTimeDivider top={topShift + 4} variant={"inset"} />
+      <StyledCurrentTimeDivider
+        top={topShift + 4}
+        variant={'inset'}
+        width={width}
+      />
     </>
   );
 };

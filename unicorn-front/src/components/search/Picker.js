@@ -1,11 +1,11 @@
-import * as React from "react";
-import Popover from "@mui/material/Popover";
-import DateAdapter from "@mui/lab/AdapterMoment";
-import { CalendarPicker } from "@mui/lab";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import styled from "@emotion/styled";
-import TextField from "@mui/material/TextField";
-import momentTimezone from "moment-timezone";
+import * as React from 'react';
+import Popover from '@mui/material/Popover';
+import DateAdapter from '@mui/lab/AdapterMoment';
+import { CalendarPicker } from '@mui/lab';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import styled from '@emotion/styled';
+import TextField from '@mui/material/TextField';
+import { useTranslation } from 'react-i18next';
 
 const SearchField = styled.div`
   display: flex;
@@ -96,9 +96,10 @@ const StyledPickerWrapper = styled.div`
 `;
 
 export default function Picker({ date, setDate }) {
-  const { moment } = new DateAdapter({ instance: momentTimezone });
+  const { moment } = new DateAdapter();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  //const [date, setDate] = useState(null);
+
+  const { t } = useTranslation('main');
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -109,16 +110,16 @@ export default function Picker({ date, setDate }) {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <StyledPickerWrapper>
       <SearchField>
-        <SearchLabelStyled>Date</SearchLabelStyled>
+        <SearchLabelStyled>{t('searchBar.date')}</SearchLabelStyled>
         <SearchInput
           variant="standard"
-          value={date ? new Date(date).toDateString() : ""}
-          placeholder="When ?"
+          value={date ? moment(new Date(date)).format('DD/MM/YYYY') : ''}
+          placeholder={t('searchBar.time')}
           onClick={handleClick}
         />
       </SearchField>
@@ -128,18 +129,19 @@ export default function Picker({ date, setDate }) {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
       >
         <LocalizationProvider dateAdapter={DateAdapter}>
           <CalendarPicker
-            minDate={moment(new Date().getDate(), "DD/MM/YYYY")}
+            minDate={moment(new Date().getDate(), 'DD/MM/YYYY')}
             date={date}
+            format="DD-MM-YYYY"
             onChange={(newDate) => {
               setDate(newDate);
               handleClose();

@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import floodLight from "../../images/floodlight.jpg";
-import Divider from "@mui/material/Divider";
-import Box from "@mui/material/Box";
-import EventDetails from "./EventDetails";
-import SideDetails from "./SideDetails";
-import Blur from "./Blur";
-import Bar from "./Bar";
-import MessageBoard from "./MessageBoard";
-import Skeleton from "@mui/material/Skeleton";
-import { countUnique, getDate } from "../../utils/utils";
-import { SessionContext } from "./SessionContext";
+import React from 'react';
+import styled from '@emotion/styled';
+import floodLight from '../../images/floodlight.jpg';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import EventDetails from './EventDetails';
+import SideDetails from './SideDetails';
+import Blur from './Blur';
+import Bar from './Bar';
+import MessageBoard from './message/MessageBoard';
+import Skeleton from '@mui/material/Skeleton';
+import { countUnique, getDate } from '../../utils/utils';
+import { SessionContext } from './SessionContext';
+import { Redirect } from 'react-router-dom';
+import useSessionData from './hooks/useSessionData';
 
 const StyledMainContent = styled.div`
   max-width: 1080px;
@@ -109,40 +111,12 @@ const StyledChat = styled.div`
   } ;
 `;
 
-const fetchSessionData = ({ sessionId }) => {
-  let backEndUrl = process.env.REACT_APP_backEndUrl || "http://localhost:8080"
-  return fetch(`${backEndUrl}/pitch/sessions/${sessionId}`, {
-    method: "GET",
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(
-          "Sorry! We are not able to create a session for you at the moment. Try again later"
-        );
-      }
-      return res.json();
-    })
-    .then((values) => {
-      return values;
-    })
-    .catch(() => {});
-};
-
 const EventSession = ({ sessionId }) => {
-  const [sessionData, setSessionData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-  const [backEndUrl, setBackEndUrl] = useState("http://localhost:8080");
-  useEffect(async () => {
-    try {
-      setIsLoading(true);
-      let data = await fetchSessionData({ sessionId });
-      setSessionData(data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Unable to fetch event session ", error);
-      setIsLoading(false);
-    }
-  }, []);
+  const { sessionData, isLoading, isError } = useSessionData(sessionId);
+
+  if (isError) {
+    return <Redirect to={'/'} />;
+  }
 
   return (
     <div>
@@ -163,7 +137,7 @@ const EventSession = ({ sessionId }) => {
                   <Skeleton sx={{ mb: 3 }} width="70%" height={30} />
                   <Skeleton sx={{ mb: 2 }} width="60%" height={20} />
                   <Skeleton sx={{ mb: 2 }} width="30%" height={20} />
-                  <Skeleton sx={{ mb: 2 }} width="30%" variant={"text"} />
+                  <Skeleton sx={{ mb: 2 }} width="30%" variant={'text'} />
                 </Box>
               ) : (
                 <EventDetails
@@ -171,7 +145,7 @@ const EventSession = ({ sessionId }) => {
                   startTime={sessionData.start_time}
                   endTime={sessionData.end_time}
                   participants={countUnique(sessionData.players)}
-                  price={15}
+                  price={sessionData.price}
                   date={sessionData.date}
                 />
               )}
@@ -182,7 +156,7 @@ const EventSession = ({ sessionId }) => {
             <StyledChat>
               <MessageBoard sessionId={sessionId} />
             </StyledChat>
-            <Divider variant={"middle"} orientation={"vertical"} flexItem />
+            <Divider variant={'middle'} orientation={'vertical'} flexItem />
             {isLoading ? (
               <Box sx={{ m: 2 }}>
                 <Skeleton sx={{ mb: 1 }} width="150px" height={30} />
@@ -194,7 +168,7 @@ const EventSession = ({ sessionId }) => {
                 date={`${getDate(
                   sessionData.date
                 )} @ ${sessionData.start_time.slice(0, 5)}`}
-                location={"A.A Stadium"}
+                location={`${sessionData.city}`}
                 sessionId={sessionId}
               />
             )}

@@ -1,30 +1,30 @@
-import { Card, Divider, ListItemButton } from "@mui/material";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
-import ListItemText from "@mui/material/ListItemText";
-import Metadata from "../MetaData";
-import AttachMoneyRoundedIcon from "@mui/icons-material/AttachMoneyRounded";
-import React from "react";
-import styled from "@emotion/styled";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import usePitchData from "./hooks/usePitchData";
-import Skeleton from "@mui/material/Skeleton";
-import Box from "@mui/material/Box";
+import { Card, Divider, ListItemButton } from '@mui/material';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+import ListItemText from '@mui/material/ListItemText';
+import Metadata from '../MetaData';
+import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
+import React from 'react';
+import styled from '@emotion/styled';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import usePitchData from './hooks/usePitchData';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
+import { useHistory } from 'react-router-dom';
 
 const StyledMetaData = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: 50px;
   padding-left: 10px;
 `;
 
 const StyledCardTitle = styled.h3`
-  font-family: "Ubuntu", sans-serif;
-  textalign: "center";
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
 `;
 
 const StyledListIcon = styled(ListItemIcon)`
@@ -32,15 +32,16 @@ const StyledListIcon = styled(ListItemIcon)`
 `;
 
 const styleList = {
-  width: "100%",
+  width: '100%',
   maxWidth: 360,
-  bgcolor: "background.paper",
+  bgcolor: 'background.paper',
 };
 
 const PitchMetaData = ({ pitchId }) => {
   const { pitch, isLoading, isError } = usePitchData(pitchId);
+  const history = useHistory();
 
-  if (isLoading || isError) {
+  if (isLoading) {
     return (
       <Box sx={{ m: 4 }}>
         <Skeleton
@@ -54,6 +55,10 @@ const PitchMetaData = ({ pitchId }) => {
         <Skeleton sx={{ mb: 2 }} width="60%" height={30} animation="wave" />
       </Box>
     );
+  }
+
+  if (isError || pitch === undefined) {
+    return history.push('/');
   }
   return (
     <StyledMetaData>
@@ -71,12 +76,12 @@ const PitchMetaData = ({ pitchId }) => {
             <ListItem disableGutters>
               <ListItemButton>
                 <StyledListIcon>
-                  <EmojiPeopleIcon fontSize={"medium"} />
+                  <EmojiPeopleIcon fontSize={'medium'} />
                 </StyledListIcon>
                 <ListItemText
                   primary={
                     <Metadata
-                      fieldName={"Capacity"}
+                      fieldName={'capacity'}
                       fieldValue={pitch.capacity}
                     />
                   }
@@ -87,11 +92,11 @@ const PitchMetaData = ({ pitchId }) => {
             <ListItem disableGutters>
               <ListItemButton>
                 <StyledListIcon>
-                  <AttachMoneyRoundedIcon fontSize={"medium"} />
+                  <AttachMoneyRoundedIcon fontSize={'medium'} />
                 </StyledListIcon>
                 <ListItemText
                   primary={
-                    <Metadata fieldName={"Price"} fieldValue={pitch.price} />
+                    <Metadata fieldName={'price'} fieldValue={pitch.price} />
                   }
                 />
               </ListItemButton>

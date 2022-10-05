@@ -1,6 +1,6 @@
-import Divider from "@mui/material/Divider";
-import React from "react";
-import styled from "@emotion/styled";
+import Divider from '@mui/material/Divider';
+import React from 'react';
+import styled from '@emotion/styled';
 
 const StyledTime = styled.div`
   display: grid;
@@ -11,6 +11,7 @@ const StyledTime = styled.div`
 const StyledPara = styled.p`
   font-weight: 600;
   font-size: 11px;
+  font-family: 'Ubuntu', sans-serif;
   color: #70757a;
   margin-block-start: 0em;
   margin-block-end: 0em;
@@ -24,6 +25,8 @@ const StyledDivider = styled(Divider)`
   .MuiDivider-wrapper {
     padding-left: 18.6px;
   }
+  min-height: 12px;
+  max-height: 12px;
 `;
 
 const TimeGutter = () => {
@@ -77,8 +80,8 @@ const TimeGutter = () => {
         <StyledPara>11 AM</StyledPara>
       </StyledDivider>
       <StyledTime />
-      <StyledDivider id={"mid-day"} textAlign="left">
-        <StyledPara>0 PM</StyledPara>
+      <StyledDivider id={'mid-day'} textAlign="left">
+        <StyledPara>12 PM</StyledPara>
       </StyledDivider>
       <StyledTime />
       <StyledDivider textAlign="left">

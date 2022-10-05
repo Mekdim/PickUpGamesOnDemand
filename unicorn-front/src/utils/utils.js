@@ -14,8 +14,27 @@ const convertToDateString = (date) => {
   return new Date(date).toDateString();
 };
 
+const getDayOfWeek = (date) => {
+  return new Date(date).toLocaleString('en-us', { weekday: 'short' });
+};
+
+const getMonthName = (date) => {
+  return new Date(date).toLocaleString('en-us', { month: 'long' });
+};
+
+const getDayOfMonth = (date) => {
+  return new Date(date).toLocaleString('en-us', { day: 'numeric' });
+};
+
 const getDate = (date) => {
-  return date ? date.split("T")[0] : "";
+  return date ? date.split('T')[0] : '';
+};
+
+const convertTimeStringToAMPM = (timeString) => {
+  return new Date('1995-08-24T' + timeString + 'Z').toLocaleTimeString(
+    'en-US',
+    { timeZone: 'UTC', hour12: true, hour: 'numeric', minute: 'numeric' }
+  );
 };
 
 const topShiftMultiplier = (minute) => {
@@ -42,7 +61,7 @@ const topShiftMultiplier = (minute) => {
 const countUnique = (iterable) => {
   let set = new Set();
   iterable.forEach((player) => {
-    if (player.player_id !== null) {
+    if (player.player_id !== null && player.status === 'Confirmed') {
       set.add(player.player_id);
     }
   });
@@ -56,4 +75,8 @@ module.exports = {
   topShiftMultiplier,
   getDate,
   countUnique,
+  getDayOfWeek,
+  getDayOfMonth,
+  getMonthName,
+  convertTimeStringToAMPM,
 };
